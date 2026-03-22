@@ -1,0 +1,21 @@
+@import '../utils/variables.scss';
+
+header{
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 100px;
+}
+
+.header__nav>ul>li{
+    font-size: 21px;
+}
+
+.logo{
+    height: 36px;
+    width: auto;
+}
+
+.header__buttonConnection{
+    background-color: $main-color;
+    color: white;
+}

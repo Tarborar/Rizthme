@@ -1,0 +1,76 @@
+@import './utils/variables.scss';
+
+//Global
+html{
+    max-width: 1240px;
+    margin: 0 auto;
+}
+body{
+    background-color: #0C0104;
+    font-family: "Kumbh Sans", sans-serif;
+    font-optical-sizing: auto;
+    color: white;
+    padding: 32px;
+}
+
+//Position
+.horizontal{
+    display: flex;
+    flex-direction: row;
+}
+.vertical{
+    display: flex;
+    flex-direction: column;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+//Espacement
+.gap{
+    gap: $gap-desktop;
+}
+.buttonPadding{
+    padding: $button-padding;
+    height: $button-heightDesktop;
+    border-radius: $border-radius;
+}
+
+//Style
+.backgroundColor{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background : -webkit-gradient(radial,50% 0% ,0 , 50% 0%, 1080 ,color-stop(0,rgba(255, 36, 78, 1) ),color-stop(1,rgba(12, 1, 4, 0) ));
+    opacity : 0.25;
+}
+.glass{
+    background-color: rgba($color: white, $alpha: 0.02);
+    border: solid 1px rgba($color: white, $alpha: 0.05);
+}
+
+//Texte
+h1, h2{
+    font-size: 72px;
+    font-weight: 600;
+    text-wrap: balance;
+}
+
+.smallTitle{
+    font-size: 32px;
+}
+
+.buttonText{
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.paragraph{
+    font-size: 18px;
+}

@@ -1,8 +1,8 @@
 function Home() {
     return (
-    <>
-        <h1>Rizthme</h1>
-    </>
+    <div className="home center">
+        <h1>Elevate your conversation with bot music</h1>
+    </div>
   )
 }
 
