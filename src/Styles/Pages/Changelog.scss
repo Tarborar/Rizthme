@@ -1,0 +1,18 @@
+.changelog__date{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400 !important;
+    text-wrap: nowrap;
+    flex: 1;
+}
+
+.changelog__info{
+    display: flex;
+    flex: 4;
+}
+
+.changelog__paragraph{
+    padding: 32px;
+    border-radius: 17px;
+}

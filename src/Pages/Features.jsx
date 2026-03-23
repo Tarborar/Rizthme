@@ -11,18 +11,17 @@ function Features() {
         <div className='horizontal gap'>
             <div className='features__card glass features__cardUp'>
                 <h3 className='smallTitle'>Playlist</h3>
-                <div className="paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing</div>
+                <p className="paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
             </div>
             <div className='features__card glass'>
                 <h3 className='smallTitle'>Interactif</h3>
-                <div className="paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing</div>
+                <p className="paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
             </div>
             <div className='features__card glass features__cardUp'>
                 <h3 className='smallTitle'>Sans pub</h3>
-                <div className="paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing</div>
+                <p className="paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
             </div>
         </div>
-        
     </div>
   )
 }

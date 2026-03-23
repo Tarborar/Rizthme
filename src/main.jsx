@@ -2,16 +2,15 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import Home from './Pages/Home.jsx'
-import Header from './Components/Header.jsx'
-import App from './Pages/App.jsx'
-import Features from './Pages/Features.jsx'
-import Changelog from './Pages/Changelog.jsx'
-import Faq from './Pages/Faq.jsx'
-import Error from './Pages/Error.jsx'
+import Home from './pages/Home.jsx'
+import Header from './components/Header.jsx'
+import App from './pages/App.jsx'
+import Features from './pages/Features.jsx'
+import Changelog from './pages/Changelog.jsx'
+import Faq from './pages/Faq.jsx'
+import Error from './pages/Error.jsx'
 
 import './Styles/main.scss'
-
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
