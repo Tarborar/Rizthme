@@ -93,6 +93,7 @@ h1, h2{
 
 .smallTitle{
     font-size: 32px;
+    font-weight: 600;
 }
 
 .buttonText{
@@ -102,9 +103,17 @@ h1, h2{
 
 .paragraph{
     font-size: 18px;
+    font-weight: 400;
+    color: white;
+    opacity: 0.5;
 }
 
 //Icon
+.logo{
+    width: 30%;
+    height: auto;
+}
 .discordIcon{
     font-size: 21px;
 }
+

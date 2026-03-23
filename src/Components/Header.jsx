@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import '../Styles/Components/Header.scss';
-import Logo from '../assets/logo1.svg';
+import LogoNav from '../assets/logo1.svg';
 
 function Header(){
     return(
         <header className='horizontal'>
-            <Link to="/"><img src={Logo} alt="Logo Rizthme"  className='logo'/></Link>
+            <Link to="/"><img src={LogoNav} alt="Logo Rizthme"  className='logoNav'/></Link>
             <nav className="header__nav center">
                 <ul className="center glass gap buttonPadding">
                     <Link to="app"><li>App</li></Link>

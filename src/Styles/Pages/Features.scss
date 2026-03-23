@@ -1,0 +1,12 @@
+.features__card{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 50px 24px;
+    border-radius: 32px;
+    max-width: 300px;
+}
+
+.features__cardUp{
+    transform: translateY(-100px);
+}
