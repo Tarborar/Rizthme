@@ -12,6 +12,7 @@ import Error from './Pages/Error.jsx'
 
 import './Styles/main.scss'
 
+
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <Router>

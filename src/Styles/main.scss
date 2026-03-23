@@ -5,13 +5,38 @@
 html{
     max-width: 1240px;
     margin: 0 auto;
+
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 body{
+    position: relative;
     background-color: #0C0104;
     font-family: "Kumbh Sans", sans-serif;
     font-optical-sizing: auto;
     color: white;
     padding: 32px;
+
+    //Cadrillage
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(255, 16, 73, 0.04), 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 16, 73, 0.04), 1px, transparent 1px); 
+    z-index: -2;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../assets/ParticulesBackground.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
 }
 
 //Position
@@ -50,11 +75,12 @@ body{
     height: 100%;
     background : -webkit-gradient(radial,50% 0% ,0 , 50% 0%, 1080 ,color-stop(0,rgba(255, 36, 78, 1) ),color-stop(1,rgba(12, 1, 4, 0) ));
     opacity : 0.25;
-    z-index: -1;
+    pointer-events: none; //Obligatoire sinon le site n'est pas cliquable
 }
 .glass{
     background-color: rgba($color: white, $alpha: 0.02);
     border: solid 1px rgba($color: white, $alpha: 0.05);
+    z-index: 0; //Passe par dessous les éléments
 }
 
 //Texte
@@ -62,6 +88,7 @@ h1, h2{
     font-size: 72px;
     font-weight: 600;
     text-wrap: balance;
+    filter: drop-shadow(0 0 15px rgba(255, 16, 73, 0.75));
 }
 
 .smallTitle{
@@ -75,4 +102,9 @@ h1, h2{
 
 .paragraph{
     font-size: 18px;
+}
+
+//Icon
+.discordIcon{
+    font-size: 21px;
 }
