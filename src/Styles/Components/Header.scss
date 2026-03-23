@@ -6,8 +6,9 @@ header{
     margin-bottom: 100px;
 }
 
-.header__nav>ul>li{
+.header__nav>ul>*{
     font-size: 21px;
+    color: white;
 }
 
 .logo{
