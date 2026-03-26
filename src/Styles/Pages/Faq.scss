@@ -1,0 +1,33 @@
+.faq{
+    position: relative;
+}
+
+.faq__button {
+    position: absolute;
+    top: 400px;
+}
+
+.faq__title{
+    position: absolute;
+    top: 500px;
+}
+
+.faq__paragraph{
+    position: absolute;
+    top: 600px;
+    max-width: 840px;
+    padding: 32px;
+    border-radius: 17px;
+}
+
+.path{
+    fill: rgba($color: white, $alpha: 0.02);
+    stroke: rgba($color: white, $alpha: 0.05);
+    stroke-linecap: round;
+
+    &:hover{
+        filter: drop-shadow(0 0 5px rgba(255, 16, 73, 1));
+        stroke: white;
+        cursor: pointer;
+    }
+}
