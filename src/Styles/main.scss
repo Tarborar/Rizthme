@@ -3,7 +3,7 @@
 
 //Global
 html{
-    max-width: 1240px;
+    max-width: 1324px;
     margin: 0 auto;
     
     overflow-x: hidden;
@@ -81,6 +81,7 @@ body::before {
     background-color: rgba($color: white, $alpha: 0.02);
     border: solid 1px rgba($color: white, $alpha: 0.05);
     z-index: 0; //Passe par dessous les éléments
+    // backdrop-filter: blur(2px);
 }
 
 //Texte
