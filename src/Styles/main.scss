@@ -60,8 +60,17 @@ body::before {
 .gap{
     gap: $gap-desktop;
 }
+.smallGap{
+    gap: calc($gap-desktop/2);
+}
 .buttonPadding{
     padding: $button-padding;
+    height: $button-heightDesktop;
+    border-radius: $border-radius;
+}
+
+.audioPadding{
+    padding: 0 16px;
     height: $button-heightDesktop;
     border-radius: $border-radius;
 }

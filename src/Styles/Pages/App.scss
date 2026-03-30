@@ -33,6 +33,14 @@
 
 .app__playlist{
     padding: 50px;
+    width: 100%;
+}
+
+.app__playlistSlot{
+    height: calc($button-heightDesktop*2);
+    width: 100%;
+    border: dashed 2px rgba($color: white, $alpha: 0.05) !important;
+    border-radius: $border-radius;
 }
 
 .app__add{
@@ -55,8 +63,17 @@ input[type="file"] {
 //#########-- Menu droite --#########
 .app__folder{
     justify-content: space-between;
-    padding: 50px;
+    padding: 25px;
     border-left: solid 1px rgba($color: white, $alpha: 0.05);
+}
+
+.app__folderTitle{
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.app__folderList{
+    padding: 0 25px;
 }
 
 .app__edit{
@@ -69,4 +86,25 @@ input[type="file"] {
     width: 75px;
     height: 75px;
     border-radius: $border-radius;
+}
+
+audio::-webkit-media-controls-enclosure {
+    //glass
+    background-color: rgba($color: white, $alpha: 0.02);
+    border: solid 1px rgba($color: white, $alpha: 0.05);
+
+    border-radius: 17px;
+}
+
+.app__folderAudio{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 16px;
+}
+
+.app__audioCover{
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
 }
