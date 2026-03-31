@@ -1,9 +1,30 @@
+//Data
 import { playlist } from "../datas/playlist"
 
+//Composants
+import AppNavigation from "../components/AppNavigation";
+
+//Hook
 import { useState } from 'react';
+
+//CSS
 import '../Styles/pages/App.scss'
 
+//Icon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShuffle } from '@fortawesome/free-solid-svg-icons'
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
+import { faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faDiscord } from '@fortawesome/free-brands-svg-icons';
+import { faPause } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+
 function App() {
+    //useState
     const [appMenu, setAppMenu] = useState('playlist'); //affichage menu central
     const [audioUrl, setAudioUrl] = useState(null); //url local du fichier audio
     const [queue, setQueue] = useState([]); //playlist en attente de jouer
@@ -13,20 +34,20 @@ function App() {
     //Affichage de la page centrale de l'application
     switch(appMenu){
         case 'playlist':
-            // console.log(appMenu);
+            console.log(appMenu);
             break;
         case 'folder':
-            // console.log(appMenu);
-            break;
-        case 'history':
-            // console.log(appMenu);
+            console.log(appMenu);
             break;
         case 'help':
-            // console.log(appMenu);
+            console.log(appMenu);
+            break;
+        case 'discord':
+            console.log(appMenu);
             break;
     }
 
-    //Ajoute à la playlist[] le fichier sélectionné
+    //Ajoute à la playlist[] le fichier ajouté
     function upload(e){
         const file = e.target.files[0];
         const url = URL.createObjectURL(file)
@@ -62,16 +83,9 @@ function App() {
 
     return (
     <div className="appDesign glass">
-        <div  className="app horizontal glass">
+        <div className="app horizontal glass">
             {/*#########-- Menu Gauche --######### */}
-            <nav className="app__menu">
-                <ul className="vertical gap">
-                    <li className='app__menuButton glass center' onClick={() => setAppMenu('playlist')}>Playlist</li>
-                    <li className='app__menuButton glass center' onClick={() => setAppMenu('folder')}>Folder</li>
-                    <li className='app__menuButton glass center' onClick={() => setAppMenu('history')}>History</li>
-                    <li className='app__menuButton glass center' onClick={() => setAppMenu('help')}>Help</li>
-                </ul>
-            </nav>
+            <AppNavigation setAppMenu={setAppMenu}/>
             {/*#########-- Main Central --######### */}
             <div className="app__main vertical">
                 <div className="app__playlist vertical smallGap center">
@@ -85,7 +99,7 @@ function App() {
                 <div className="app__add">
                     <label htmlFor="app__inputFile" className="app__addButton glass center">
                         <input id='app__inputFile' type='file' accept='.mp3,audio/*' onChange={upload}/>
-                        +
+                        <FontAwesomeIcon icon={faPlus} className='app__icon'/>
                     </label>
                 </div>
             </div>
@@ -93,7 +107,10 @@ function App() {
             <div className="app__folder vertical">
                 <div className='vertical smallGap'>
                     <div className="app__folderTitle center">Folder</div>
-                    <input type="text" className='glass buttonPadding buttonText' />
+                    <div className="app__folderInput">
+                        <input type="text" className='glass buttonPadding buttonText app__folderInputText' />
+                        <FontAwesomeIcon icon={faMagnifyingGlass} className='app__icon app__folderInputIcon'/>
+                    </div>
                     <div className="app__folderList vertical smallGap">
                         {playlist.map((audio) =>(
                             <div key={audio.id}>
@@ -106,9 +123,15 @@ function App() {
                     </div>
                 </div>
                 <div className="app__edit glass horizontal">
-                    <button className='app__editButton glass center'>Folder</button>
-                    <button className='app__editButton glass center'>Edit</button>
-                    <button className='app__editButton glass center'>Delete</button>
+                    <button className='app__editButton glass center'>
+                        <FontAwesomeIcon icon={faFolderOpen} className='app__icon'/>
+                    </button>
+                    <button className='app__editButton glass center'>
+                        <FontAwesomeIcon icon={faPenToSquare} className='app__icon'/>
+                    </button>
+                    <button className='app__editButton glass center'>
+                        <FontAwesomeIcon icon={faTrash} className='app__icon'/>
+                    </button>
                 </div>
             </div>
         </div>

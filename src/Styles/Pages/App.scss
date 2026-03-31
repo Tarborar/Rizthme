@@ -13,15 +13,21 @@
     
 }
 
+.app__icon{
+    font-size: 25px;
+    opacity: 0.5;
+    color: white;
+}
+
 //#########-- Menu Gauche --#########
 .app__menu{
     border-right: solid 1px rgba($color: white, $alpha: 0.05);
-    padding: 50px;
+    padding: 25px;
 }
 
 .app__menuButton{
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     border-radius: $border-radius;
 }
 
@@ -32,7 +38,7 @@
 }
 
 .app__playlist{
-    padding: 50px;
+    padding: 25px;
     width: 100%;
 }
 
@@ -70,6 +76,21 @@ input[type="file"] {
 .app__folderTitle{
     font-size: 32px;
     font-weight: 600;
+}
+
+.app__folderInput{
+    position: relative;
+}
+
+.app__folderInputText{
+    padding-left: 64px !important;
+}
+
+.app__folderInputIcon{
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .app__folderList{
