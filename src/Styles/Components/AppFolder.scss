@@ -1,0 +1,36 @@
+.app__folderTitle{
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.app__folderInput{
+    position: relative;
+}
+
+.app__folderInputIcon{
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.app__folderInputText{
+    padding-left: 64px !important;
+}
+
+.app__folderList{
+    padding: 0 25px;
+}
+
+.app__folderAudio{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 16px;
+}
+
+.app__audioCover{
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+}

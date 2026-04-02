@@ -3,6 +3,10 @@ import { playlist } from "../datas/playlist"
 
 //Composants
 import AppNavigation from "../components/AppNavigation";
+import AppQueue from "../components/AppQueue";
+import AppAddingFile from "../components/AppAddingFile";
+import AppFolder from "../components/AppFolder";
+import AppEdit from "../components/AppEdit";
 
 //Hook
 import { useState } from 'react';
@@ -10,7 +14,7 @@ import { useState } from 'react';
 //CSS
 import '../Styles/pages/App.scss'
 
-//Icon
+/* Icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShuffle } from '@fortawesome/free-solid-svg-icons'
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
@@ -22,6 +26,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+*/
 
 function App() {
     //useState
@@ -52,6 +57,7 @@ function App() {
         const file = e.target.files[0];
         const url = URL.createObjectURL(file)
         setAudioUrl(url);
+        console.log(audioUrl);
 
         playlist.push(
             {
@@ -63,6 +69,7 @@ function App() {
         )
     }
 
+    //Set les données pour le drop
     function dragStart(e, audio){
         e.dataTransfer.setData('text/plain', JSON.stringify(audio)); //obligé de convertir en chaine de caractère pour stocker l'élément glissé
         e.dataTransfer.effectAllowed = 'move'; //dessine le curseur move
@@ -84,55 +91,14 @@ function App() {
     return (
     <div className="appDesign glass">
         <div className="app horizontal glass">
-            {/*#########-- Menu Gauche --######### */}
             <AppNavigation setAppMenu={setAppMenu}/>
-            {/*#########-- Main Central --######### */}
             <div className="app__main vertical">
-                <div className="app__playlist vertical smallGap center">
-                    <div className="app__playlistSlot glass" onDragOver={dragOver} onDrop={drop}>
-                    </div>
-                    {queue.map((q) =>(
-                        <audio key={q.id} controls src={q.url}></audio>
-                    ))}
-                </div>
-                {/*#########-- Bouton Ajout de fichier --######### */}
-                <div className="app__add">
-                    <label htmlFor="app__inputFile" className="app__addButton glass center">
-                        <input id='app__inputFile' type='file' accept='.mp3,audio/*' onChange={upload}/>
-                        <FontAwesomeIcon icon={faPlus} className='app__icon'/>
-                    </label>
-                </div>
+                <AppQueue queue={queue} dragOver={dragOver} drop={drop} />
+                <AppAddingFile upload={upload} />
             </div>
-            {/*#########-- Menu Droite --######### */}
             <div className="app__folder vertical">
-                <div className='vertical smallGap'>
-                    <div className="app__folderTitle center">Folder</div>
-                    <div className="app__folderInput">
-                        <input type="text" className='glass buttonPadding buttonText app__folderInputText' />
-                        <FontAwesomeIcon icon={faMagnifyingGlass} className='app__icon app__folderInputIcon'/>
-                    </div>
-                    <div className="app__folderList vertical smallGap">
-                        {playlist.map((audio) =>(
-                            <div key={audio.id}>
-                                <div draggable className="app__folderAudio horizontal glass audioPadding buttonText" onDragStart={(e) => dragStart(e, audio)}>
-                                    <div className="app__audioCover glass"></div>
-                                    <div className="app__audioTitle paragraph">{audio.title}</div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div className="app__edit glass horizontal">
-                    <button className='app__editButton glass center'>
-                        <FontAwesomeIcon icon={faFolderOpen} className='app__icon'/>
-                    </button>
-                    <button className='app__editButton glass center'>
-                        <FontAwesomeIcon icon={faPenToSquare} className='app__icon'/>
-                    </button>
-                    <button className='app__editButton glass center'>
-                        <FontAwesomeIcon icon={faTrash} className='app__icon'/>
-                    </button>
-                </div>
+                <AppFolder playlist={playlist} dragStart={dragStart} />
+                <AppEdit />
             </div>
         </div>
     </div>

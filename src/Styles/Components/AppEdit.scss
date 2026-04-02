@@ -1,0 +1,13 @@
+@import '../utils/variables.scss';
+
+.app__edit{
+    padding: 25px;
+    gap: 25px;
+    border-radius: $border-radius;
+}
+
+.app__editButton{
+    width: 75px;
+    height: 75px;
+    border-radius: $border-radius;
+}
