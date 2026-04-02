@@ -7,6 +7,7 @@ import AppQueue from "../components/AppQueue";
 import AppAddingFile from "../components/AppAddingFile";
 import AppFolder from "../components/AppFolder";
 import AppEdit from "../components/AppEdit";
+import AudioPanel from "../components/AudioPanel";
 
 //Hook
 import { useState } from 'react';
@@ -93,6 +94,7 @@ function App() {
         <div className="app horizontal glass">
             <AppNavigation setAppMenu={setAppMenu}/>
             <div className="app__main vertical">
+                <AudioPanel />
                 <AppQueue queue={queue} dragOver={dragOver} drop={drop} />
                 <AppAddingFile upload={upload} />
             </div>
