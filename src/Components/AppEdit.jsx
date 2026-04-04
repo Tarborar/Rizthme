@@ -1,9 +1,7 @@
 import "../Styles/components/AppEdit.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFolderOpen, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function AppEdit(){
     return(

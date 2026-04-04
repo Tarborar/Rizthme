@@ -35,7 +35,7 @@ function AudioPanel(){
 
     //onChange du input range
     function changeTimeRange(){
-        setCurrentTime(timeRangeRef.current.value); 
+        setCurrentTime(timeRangeRef.current.value);
         audioRef.current.currentTime = timeRangeRef.current.value; //change le temps de <audio> en fonction de la value de l'input range
     }
 

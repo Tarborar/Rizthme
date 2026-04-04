@@ -35,21 +35,19 @@ function App() {
     const [audioUrl, setAudioUrl] = useState(null); //url local du fichier audio
     const [queue, setQueue] = useState([]); //playlist en attente de jouer
 
-    console.log(playlist);
-
     //Affichage de la page centrale de l'application
     switch(appMenu){
         case 'playlist':
-            console.log(appMenu);
+            //console.log(appMenu);
             break;
         case 'folder':
-            console.log(appMenu);
+            //console.log(appMenu);
             break;
         case 'help':
-            console.log(appMenu);
+            //console.log(appMenu);
             break;
         case 'discord':
-            console.log(appMenu);
+            //console.log(appMenu);
             break;
     }
 
