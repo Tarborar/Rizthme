@@ -4,12 +4,12 @@ import "../Styles/components/AppFolder.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-function AppFolder({ playlist, dragStart }){
+function AppFolder({ folder, dragStart }){
     
     const [inputValue, setInputValue] = useState(""); //valeur de l'input search
 
     //Filtre playlist avec la valeur de l'input search
-    const filteredPlaylist = playlist.filter(p => p.title.toLowerCase().includes(inputValue));
+    const filteredPlaylist = folder.filter(p => p.title.toLowerCase().includes(inputValue));
 
     //Récupère la valeur de l'input search
     function search(e){

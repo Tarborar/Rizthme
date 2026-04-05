@@ -8,6 +8,8 @@ import AppAddingFile from "../components/AppAddingFile";
 import AppFolder from "../components/AppFolder";
 import AppEdit from "../components/AppEdit";
 import AudioPanel from "../components/AudioPanel";
+import RemoveModal from "../components/RemoveModal";
+import EditModal from "../components/EditModal";
 
 //Hook
 import { useState } from 'react';
@@ -34,6 +36,9 @@ function App() {
     const [appMenu, setAppMenu] = useState('playlist'); //affichage menu central
     const [audioUrl, setAudioUrl] = useState(null); //url local du fichier audio
     const [queue, setQueue] = useState([]); //playlist en attente de jouer
+    const [folder, setFolder] = useState(playlist); //doublon de playlist[] pour éditer / supprimer
+    const [removeModal, setRemoveModal] = useState (false); //vérifie l'activation de la modale
+    const [itemToRemove, setItemToRemove] = useState(null); //stock l'élément dragged pour le remove
 
     //Affichage de la page centrale de l'application
     switch(appMenu){
@@ -51,21 +56,21 @@ function App() {
             break;
     }
 
-    //Ajoute à la playlist[] le fichier ajouté
+    //Ajoute à folder[] le fichier ajouté
     function upload(e){
         const file = e.target.files[0];
         const url = URL.createObjectURL(file)
         setAudioUrl(url);
         console.log(audioUrl);
 
-        playlist.push(
-            {
-                "id": `${file.name} ${playlist.length+1}`,
-                "url": url,
-                "title": file.name,
-                "cover": ""
-            }
-        )
+        const newFile = {
+            "id": `${file.name} ${playlist.length+1}`,
+            "url": url,
+            "title": file.name,
+            "cover": ""
+        }
+
+        setFolder([...folder, newFile]); //push le nouveau fichier dans folder[]
     }
 
     //Set les données pour le drop
@@ -80,27 +85,56 @@ function App() {
     }
 
     //Ajoute au tableau queue[] l'item dragged
-    function drop(e){
+    function dragAddQueue(e){
         e.preventDefault();
         const draggedAudio = JSON.parse(e.dataTransfer.getData('text/plain'));
 
         setQueue([...queue, draggedAudio]); //push l'item dans queue[]
     }
 
+    //Supprime du tableau folder[] l'item dragged
+    function dragRemoveFolder(e){
+        e.preventDefault();
+        console.log("remove !");
+
+        //Conserve l'élément à supprimer pour le bouton Remove de la modale
+        setItemToRemove(JSON.parse(e.dataTransfer.getData('text/plain'))); 
+
+        toggleRemoveModal();
+    }
+
+    //Supprime l'élément conservé de dragRemoveFolder()
+    function removeFolder(){
+        setFolder(folder.filter(item => item.id !== itemToRemove.id));
+        setItemToRemove(null);
+    }
+
+    //Active ou désactive la modale Remove
+    function toggleRemoveModal(){
+        setRemoveModal(!removeModal);
+    }
+
     return (
-    <div className="appDesign glass">
-        <div className="app horizontal glass">
-            <AppNavigation setAppMenu={setAppMenu}/>
-            <div className="app__main vertical">
-                <AudioPanel />
-                <AppQueue queue={queue} dragOver={dragOver} drop={drop} />
-                <AppAddingFile upload={upload} />
-            </div>
-            <div className="app__folder vertical">
-                <AppFolder playlist={playlist} dragStart={dragStart} />
-                <AppEdit />
+    <div>
+        <div className={`appDesign glass ${removeModal ? "modalBackground" : ""}`}>
+            <div className="app horizontal glass">
+                <AppNavigation setAppMenu={setAppMenu}/>
+                <div className="app__main vertical">
+                    <AudioPanel />
+                    <AppQueue queue={queue} dragOver={dragOver} dragAddQueue={dragAddQueue} />
+                    <AppAddingFile upload={upload} />
+                </div>
+                <div className="app__folder vertical">
+                    <AppFolder folder={folder} dragStart={dragStart} />
+                    <AppEdit dragOver={dragOver} dragRemoveFolder={dragRemoveFolder} />
+                </div>
             </div>
         </div>
+
+        {removeModal && (
+            <RemoveModal removeModal={removeModal} toggleRemoveModal={toggleRemoveModal} removeFolder={removeFolder}/>
+        )}
+
     </div>
   )
 }

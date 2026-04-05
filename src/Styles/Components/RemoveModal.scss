@@ -1,0 +1,19 @@
+@import '../utils/variables.scss';
+
+.removeModal{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: $border-radius;
+    padding: 50px 50px;
+    text-align: center;
+    text-wrap: balance;
+    backdrop-filter: blur(10px);
+    border: solid 1px rgba($color: white, $alpha: 0.1) !important;
+}
+
+.removeModal__buttons >*{
+    flex: 1;
+    cursor: pointer;
+}

@@ -3,6 +3,11 @@
 .appDesign{
     border-radius: 22px;
     padding: 10px;
+
+    //Si la modale Remove est active
+    &.modalBackground {
+        filter: blur(8px) brightness(0.4);
+    }
 }
 
 .app{
