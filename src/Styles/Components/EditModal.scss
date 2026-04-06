@@ -1,0 +1,66 @@
+@import '../utils/variables.scss';
+
+.editModal{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: $border-radius;
+    padding: 50px 50px;
+    text-align: center;
+    text-wrap: balance;
+    backdrop-filter: blur(10px);
+    border: solid 1px rgba($color: white, $alpha: 0.1) !important;
+    min-width: 525px;
+}
+
+.editModal__buttons >*{
+    flex: 1;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.editModal__coverButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: $border-radius;
+    cursor: pointer;
+}
+
+.editModal__cover{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.editModal__inputText{
+    width: 100%;
+}
+
+.editModal__titlePadding{
+    padding: 0 16px;
+    height: $button-heightDesktop;
+    border-radius: $border-radius;
+}
+
+.editModal__titleInput{
+    position: relative;
+    width: 100%;
+}
+
+.editModal__inputTextIcon{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}

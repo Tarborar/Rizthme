@@ -27,7 +27,9 @@ function AppFolder({ folder, dragStart }){
                 {filteredPlaylist.map((audio) =>(
                     <div key={audio.id}>
                         <div draggable className="app__folderAudio horizontal glass audioPadding buttonText" onDragStart={(e) => dragStart(e, audio)}>
-                            <div className="app__audioCover glass"></div>
+                            <div className="app__cover glass">
+                                {audio.cover && <img src={audio.cover} alt="cover" className="app__audioCover"/>}
+                            </div>
                             <div className="app__audioTitle paragraph">{audio.title}</div>
                         </div>
                     </div>

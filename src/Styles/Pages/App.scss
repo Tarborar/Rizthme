@@ -7,6 +7,7 @@
     //Si la modale Remove est active
     &.modalBackground {
         filter: blur(8px) brightness(0.4);
+        pointer-events: none;
     }
 }
 

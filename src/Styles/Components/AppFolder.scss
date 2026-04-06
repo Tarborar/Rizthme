@@ -29,8 +29,15 @@
     gap: 16px;
 }
 
+.app__cover{
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+}
+
 .app__audioCover{
     width: 30px;
     height: 30px;
+    object-fit: cover;
     border-radius: 8px;
 }

@@ -37,8 +37,14 @@ function App() {
     const [audioUrl, setAudioUrl] = useState(null); //url local du fichier audio
     const [queue, setQueue] = useState([]); //playlist en attente de jouer
     const [folder, setFolder] = useState(playlist); //doublon de playlist[] pour éditer / supprimer
-    const [removeModal, setRemoveModal] = useState (false); //vérifie l'activation de la modale
+
+    //modale
+    const [removeModal, setRemoveModal] = useState (false); //vérifie l'activation de la modale remove
     const [itemToRemove, setItemToRemove] = useState(null); //stock l'élément dragged pour le remove
+    const [editModal, setEditModal] = useState(false); //vérifie l'activation de la modale edit
+    const [itemToEdit, setItemToEdit] = useState(null); //stock l'élément dragged pour l'edit
+    const [editTitleValue, setEditTitleValue] = useState(""); //
+    const [editCoverUrl, setEditCoverUrl] = useState(null); //url local de l'image cover
 
     //Affichage de la page centrale de l'application
     switch(appMenu){
@@ -95,7 +101,6 @@ function App() {
     //Supprime du tableau folder[] l'item dragged
     function dragRemoveFolder(e){
         e.preventDefault();
-        console.log("remove !");
 
         //Conserve l'élément à supprimer pour le bouton Remove de la modale
         setItemToRemove(JSON.parse(e.dataTransfer.getData('text/plain'))); 
@@ -114,9 +119,40 @@ function App() {
         setRemoveModal(!removeModal);
     }
 
+    //Conserve l'élement à éditer pour l'interface de la modale Edit
+    function dragEditFolder(e){
+        e.preventDefault();
+
+        //Conserve l'élément à éditer pour le bouton Accept de la modale
+        setItemToEdit(JSON.parse(e.dataTransfer.getData('text/plain'))); 
+
+        toggleEditModal();
+    }
+
+    //Edit l'élément conservé de dragEditFolder
+    function editFolder(){
+
+        //Parcours folder pour changer le title édité
+        setFolder(folder.map(item =>
+        item.id === itemToEdit.id ? {... item, title: editTitleValue, cover: editCoverUrl} : item));
+        setItemToEdit(null); //reset le useState pour le prochain edit
+    }
+
+    //Active ou désactive la modale Edit
+    function toggleEditModal(){
+        setEditModal(!editModal);
+    }
+
+    //Edit la cover depuis la modale
+    function editUploadCover(e){
+        const file = e.target.files[0];
+        const url = URL.createObjectURL(file)
+        setEditCoverUrl(url); //conserve l'url locale
+    }
+
     return (
     <div>
-        <div className={`appDesign glass ${removeModal ? "modalBackground" : ""}`}>
+        <div className={`appDesign glass ${removeModal || editModal ? "modalBackground" : ""}`}>
             <div className="app horizontal glass">
                 <AppNavigation setAppMenu={setAppMenu}/>
                 <div className="app__main vertical">
@@ -126,13 +162,24 @@ function App() {
                 </div>
                 <div className="app__folder vertical">
                     <AppFolder folder={folder} dragStart={dragStart} />
-                    <AppEdit dragOver={dragOver} dragRemoveFolder={dragRemoveFolder} />
+                    <AppEdit dragOver={dragOver} dragRemoveFolder={dragRemoveFolder} dragEditFolder={dragEditFolder}/>
                 </div>
             </div>
         </div>
 
         {removeModal && (
-            <RemoveModal removeModal={removeModal} toggleRemoveModal={toggleRemoveModal} removeFolder={removeFolder}/>
+            <RemoveModal removeModal={removeModal} toggleRemoveModal={toggleRemoveModal} removeFolder={removeFolder} />
+        )}
+
+        {editModal && (
+            <EditModal 
+                editFolder={editFolder} 
+                toggleEditModal={toggleEditModal} 
+                itemToEdit={itemToEdit} 
+                editUploadCover={editUploadCover}
+                setEditTitleValue={setEditTitleValue}
+                editCoverUrl={editCoverUrl}
+            />
         )}
 
     </div>

@@ -62,7 +62,7 @@ function AudioPanel(){
                 ref={audioRef}
                 onLoadedMetadata={loaded} 
                 onTimeUpdate={timeUpdate}
-                autoPlay
+                // autoPlay
             />
             <div className="audiopanel glass horizontal smallGap">
                 <div>

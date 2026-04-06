@@ -6,8 +6,8 @@ function RemoveModal({ toggleRemoveModal, removeFolder }){
             <p className="smallTitle">Are you sure you want to remove this file ?</p>
             <div className="horizontal gap removeModal__buttons">
                 <button className="glass buttonPadding buttonText" onClick={ () =>{
-                    toggleRemoveModal();
                     removeFolder();
+                    toggleRemoveModal();
                 }}>Remove</button>
                 <button className="glass buttonPadding buttonText" onClick={toggleRemoveModal}>Cancel</button>
             </div>
