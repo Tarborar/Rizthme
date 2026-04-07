@@ -41,3 +41,10 @@
     object-fit: cover;
     border-radius: 8px;
 }
+
+.app__audioTitle{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 225px;
+}

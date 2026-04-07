@@ -2,12 +2,18 @@ import "../Styles/components/AppQueue.scss";
 
 function AppQueue({ queue, dragOver, dragAddQueue }){
     return(
-        <div className="app__playlist vertical smallGap center">
-            <div className="app__playlistSlot glass" onDragOver={dragOver} onDrop={dragAddQueue}>
-            </div>
+        <div className="app__playlist vertical smallGap">
             {queue.map((q) =>(
-                <audio key={q.id} controls src={q.url}></audio>
+                <div key={q.id} className="app__queue">
+                    <div draggable className="queue__folderAudio horizontal glass audioPadding buttonText">
+                        <div className="queue__cover glass">
+                            {q.cover && <img src={q.cover} alt="cover" className="queue__audioCover"/>}
+                        </div>
+                        <div className="queue__audioTitle paragraph">{q.title}</div>
+                    </div>
+                </div>
             ))}
+            <div className="app__playlistSlot" onDragOver={dragOver} onDrop={dragAddQueue}></div>
         </div>
     )
 }

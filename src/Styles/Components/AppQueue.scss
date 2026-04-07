@@ -3,11 +3,13 @@
 .app__playlist{
     padding: 25px;
     width: 100%;
+    height: 100%;
+    align-items: center;
 }
 
 .app__playlistSlot{
-    height: calc($button-heightDesktop*2);
-    width: 100%;
+    height: $button-heightDesktop;
+    width: 80%;
     border: dashed 2px rgba($color: white, $alpha: 0.05) !important;
     border-radius: $border-radius;
 }
@@ -18,4 +20,35 @@ audio::-webkit-media-controls-enclosure {
     border: solid 1px rgba($color: white, $alpha: 0.05);
 
     border-radius: 17px;
+}
+
+.app__queue{
+    width: 80%;
+}
+
+.queue__folderAudio{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 16px;
+}
+
+.queue__cover{
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+}
+
+.queue__audioCover{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.queue__audioTitle{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 225px;
 }

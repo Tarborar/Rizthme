@@ -132,10 +132,14 @@ function App() {
     //Edit l'élément conservé de dragEditFolder
     function editFolder(){
 
-        //Parcours folder pour changer le title édité
+        //Parcours folder pour changer title et cover édité
         setFolder(folder.map(item =>
-        item.id === itemToEdit.id ? {... item, title: editTitleValue, cover: editCoverUrl} : item));
-        setItemToEdit(null); //reset le useState pour le prochain edit
+        item.id === itemToEdit.id ? {... item, title: editTitleValue || itemToEdit.title, cover: editCoverUrl} : item));
+
+        //Reset les useState pour le prochain edit
+        setItemToEdit(null); 
+        setEditTitleValue("");
+        setEditCoverUrl(null);
     }
 
     //Active ou désactive la modale Edit
