@@ -160,7 +160,7 @@ function App() {
             <div className="app horizontal glass">
                 <AppNavigation setAppMenu={setAppMenu}/>
                 <div className="app__main vertical">
-                    <AudioPanel />
+                    <AudioPanel queue={queue} setQueue={setQueue}/>
                     <AppQueue queue={queue} dragOver={dragOver} dragAddQueue={dragAddQueue} />
                     <AppAddingFile upload={upload} />
                 </div>

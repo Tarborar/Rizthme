@@ -3,7 +3,7 @@ import "../Styles/components/AudioPanel.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faVolume, faVolumeXmark, faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 
-function AudioPanel(){
+function AudioPanel({ queue, setQueue }){
     const audioRef = useRef(null); //cible la balise <audio>
     const timeRangeRef = useRef(null); //cible l'input range temps de <audio>
     const [isPlaying, setIsPlaying] = useState(true); //vérifie si <audio> est en pause ou play
@@ -55,21 +55,27 @@ function AudioPanel(){
         )   
     }
 
+    //Enlève <audio> de queue[] quand c'est terminé
+    function removeAudio(){
+        setQueue(queue.slice(1));
+    }
+
     return(
         <div className="app__audiopanel">
             <audio 
-                src="../src/playlist/Kasbo - Horizon.mp3" 
+                src={queue[0]?.url || null} 
                 ref={audioRef}
                 onLoadedMetadata={loaded} 
                 onTimeUpdate={timeUpdate}
-                // autoPlay
+                onEnded={removeAudio}
+                autoPlay
             />
             <div className="audiopanel glass horizontal smallGap">
                 <div>
                     <div className="audiopanel__cover glass"></div>
                 </div>
                 <div className="audiopanel__info">
-                    <p className="audiopanel__title paragraph">Waiting for a music..</p>
+                    <p className="audiopanel__title paragraph">{queue[0]? queue[0].title : "Waiting for a music.."}</p>
                     <div className="audiopanel__control horizontal">
                         {isPlaying ? (
                             <FontAwesomeIcon icon={faPause} className='audiopanel__icon' onClick={play}/>

@@ -26,6 +26,11 @@ audio::-webkit-media-controls-enclosure {
     width: 80%;
 }
 
+//Cache le premier fichier dans queue
+.app__queue:nth-child(1){
+    display: none;
+}
+
 .queue__folderAudio{
     display: flex;
     align-items: center;
