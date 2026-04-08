@@ -2,9 +2,9 @@ import { useState } from "react";
 import "../Styles/components/AppFolder.scss";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
-function AppFolder({ folder, dragStart }){
+function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
     
     const [inputValue, setInputValue] = useState(""); //valeur de l'input search
 
@@ -25,14 +25,50 @@ function AppFolder({ folder, dragStart }){
             </div>
             <div className="app__folderList vertical smallGap">
                 {filteredPlaylist.map((audio) =>(
-                    <div key={audio.id}>
-                        <div draggable className="app__folderAudio horizontal glass audioPadding buttonText" onDragStart={(e) => dragStart(e, audio)}>
-                            <div className="app__cover glass">
-                                {audio.cover && <img src={audio.cover} alt="cover" className="app__audioCover"/>}
+                    //Si c'est un fichier
+                    audio.folder ? (
+                        <div 
+                            key={audio.id} 
+                            className="folderGlass glass" 
+                            draggable 
+                            onDragStart={(e) => dragStart(e, audio)}
+                            onDragOver={dragOver}
+                            onDrop={(e) => dragAddInFolder(e, audio)}
+                        >
+                            <div className="app__folderAudio vertical glass audioPadding buttonText">
+                                <div className="horizontal">
+                                    <div>
+                                        <FontAwesomeIcon icon={faFolderOpen} className='app__icon' />
+                                    </div>
+                                    <div className="horizontal app__folderName">
+                                        <div className="app__audioTitle paragraph">{audio.title}</div>
+                                        <div className="paragraph">({audio.files.length})</div>
+                                    </div>
+                                </div>
+                                <div className="vertical">
+                                    {audio.files.map((file) =>(
+                                        <div draggable className="app__folderAudio horizontal glass audioPadding buttonText">
+                                            <div className="app__cover glass">
+                                                {file.cover && <img src={file.cover} alt="cover" className="app__audioCover"/>}
+                                            </div>
+                                            <div className="app__audioTitle paragraph">{file.title}</div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="app__audioTitle paragraph">{audio.title}</div>
                         </div>
-                    </div>
+                    ) : 
+                    //Si c'est un audio
+                    (
+                        <div key={audio.id}>
+                            <div draggable className="app__folderAudio horizontal glass audioPadding buttonText" onDragStart={(e) => dragStart(e, audio)}>
+                                <div className="app__cover glass">
+                                    {audio.cover && <img src={audio.cover} alt="cover" className="app__audioCover"/>}
+                                </div>
+                                <div className="app__audioTitle paragraph">{audio.title}</div>
+                            </div>
+                        </div>
+                    )
                 ))}
             </div>
         </div>

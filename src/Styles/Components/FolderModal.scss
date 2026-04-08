@@ -1,0 +1,30 @@
+@import '../utils/variables.scss';
+
+.folderModal{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: $border-radius;
+    padding: 50px 50px;
+    text-align: center;
+    text-wrap: balance;
+    backdrop-filter: blur(10px);
+    border: solid 1px rgba($color: white, $alpha: 0.1) !important;
+    max-width: 525px;
+}
+
+.folderModal__buttons >*{
+    flex: 1;
+    cursor: pointer;
+}
+
+
+.folderModalIcon{
+    height: 53px;
+    width: 53px;
+    min-width: 53px;
+    min-height: 53px;
+    border-radius: $border-radius;
+    cursor: pointer;
+}

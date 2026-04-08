@@ -20,6 +20,22 @@
 
 .app__folderList{
     padding: 0 25px;
+    overflow-y: scroll;
+    max-height: 390px;
+
+    &::-webkit-scrollbar{
+        background-color: rgba($color: white, $alpha: 0);
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track{
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb{
+        background-color: white;
+        border-radius: 10px;
+    }
 }
 
 .app__folderAudio{
@@ -47,4 +63,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 225px;
+}
+
+.app__folderName{
+    width: 100%;
+    justify-content: space-between;
 }

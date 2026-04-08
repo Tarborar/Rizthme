@@ -23,7 +23,7 @@ function EditModal({ editFolder, toggleEditModal, itemToEdit, editUploadCover, s
                     )}
                 </label>
                 <div className="editModal__titleInput">
-                    <input type="text" defaultValue={itemToEdit.title} className='editModal__inputText glass audioPadding buttonText' onInput={getTitleValue}/>
+                    <input type="text" defaultValue={itemToEdit.title} className='editModal__inputText glass audioPadding buttonText' onInput={getTitleValue} />
                     <FontAwesomeIcon icon={faPenToSquare} className='app__icon editModal__inputTextIcon'/>
                 </div>
             </div>

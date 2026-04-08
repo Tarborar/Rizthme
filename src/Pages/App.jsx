@@ -10,26 +10,13 @@ import AppEdit from "../components/AppEdit";
 import AudioPanel from "../components/AudioPanel";
 import RemoveModal from "../components/RemoveModal";
 import EditModal from "../components/EditModal";
+import FolderModal from "../components/FolderModal";
 
 //Hook
 import { useState } from 'react';
 
 //CSS
 import '../Styles/pages/App.scss'
-
-/* Icon
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShuffle } from '@fortawesome/free-solid-svg-icons'
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
-import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
-import { faQuestion } from '@fortawesome/free-solid-svg-icons';
-import { faDiscord } from '@fortawesome/free-brands-svg-icons';
-import { faPause } from '@fortawesome/free-solid-svg-icons';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-*/
 
 function App() {
     //useState
@@ -39,12 +26,17 @@ function App() {
     const [folder, setFolder] = useState(playlist); //doublon de playlist[] pour éditer / supprimer
 
     //modale
-    const [removeModal, setRemoveModal] = useState (false); //vérifie l'activation de la modale remove
-    const [itemToRemove, setItemToRemove] = useState(null); //stock l'élément dragged pour le remove
+    const [folderModal, setFolderModal] = useState(false); //vérifie l'activation de la modale folder
     const [editModal, setEditModal] = useState(false); //vérifie l'activation de la modale edit
+    const [removeModal, setRemoveModal] = useState (false); //vérifie l'activation de la modale remove
+    
     const [itemToEdit, setItemToEdit] = useState(null); //stock l'élément dragged pour l'edit
-    const [editTitleValue, setEditTitleValue] = useState(""); //
+    const [itemToRemove, setItemToRemove] = useState(null); //stock l'élément dragged pour le remove
+    
+    const [editTitleValue, setEditTitleValue] = useState(""); //stock la valeur de l'input title
     const [editCoverUrl, setEditCoverUrl] = useState(null); //url local de l'image cover
+
+    const [folderNameValue, setFolderNameValue] = useState(""); //stock la valeur de l'input folderModal
 
     //Affichage de la page centrale de l'application
     switch(appMenu){
@@ -70,7 +62,7 @@ function App() {
         console.log(audioUrl);
 
         const newFile = {
-            "id": `${file.name} ${playlist.length+1}`,
+            "id": `${file.name}-${playlist.length+1}`,
             "url": url,
             "title": file.name,
             "cover": ""
@@ -154,9 +146,43 @@ function App() {
         setEditCoverUrl(url); //conserve l'url locale
     }
 
+    //Active ou désactive la modale Folder
+    function toggleFolderModal(){
+        setFolderModal(!folderModal);
+    }
+
+    function createFolder(){
+        const newFile = {
+            "id": `${folderNameValue}-${playlist.length+1}`,
+            "folder": true,
+            "title": folderNameValue,
+            "files": []
+        }
+
+        setFolder([...folder, newFile]); //push le nouveau fichier dans folder[]
+
+        setFolderNameValue(""); //reset pour le prochain create folder
+    }
+
+    //Ajoute <audio> dans le folder dragged .files[]
+    function dragAddInFolder(e, folderItem){
+        e.preventDefault();
+        const draggedAudio = JSON.parse(e.dataTransfer.getData('text/plain'));
+
+        setFolder(folder.map(item =>
+            item.id === folderItem.id && item.folder //parcours folder pour trouver l'audio dragged avec l'id
+            ? { ...item, files: [...item.files, draggedAudio] } //push dans files[]
+            : item
+        )
+        .filter(item => item.id !== draggedAudio.id) //enlève l'item dragged de folder
+        );
+    }
+
+    console.log(folder);
+
     return (
     <div>
-        <div className={`appDesign glass ${removeModal || editModal ? "modalBackground" : ""}`}>
+        <div className={`appDesign glass ${removeModal || editModal || folderModal ? "modalBackground" : ""}`}>
             <div className="app horizontal glass">
                 <AppNavigation setAppMenu={setAppMenu}/>
                 <div className="app__main vertical">
@@ -165,14 +191,14 @@ function App() {
                     <AppAddingFile upload={upload} />
                 </div>
                 <div className="app__folder vertical">
-                    <AppFolder folder={folder} dragStart={dragStart} />
-                    <AppEdit dragOver={dragOver} dragRemoveFolder={dragRemoveFolder} dragEditFolder={dragEditFolder}/>
+                    <AppFolder folder={folder} dragStart={dragStart} dragOver={dragOver} dragAddInFolder={dragAddInFolder}/>
+                    <AppEdit dragOver={dragOver} dragRemoveFolder={dragRemoveFolder} dragEditFolder={dragEditFolder} toggleFolderModal={toggleFolderModal}/>
                 </div>
             </div>
         </div>
 
-        {removeModal && (
-            <RemoveModal removeModal={removeModal} toggleRemoveModal={toggleRemoveModal} removeFolder={removeFolder} />
+        {folderModal && (
+            <FolderModal toggleFolderModal={toggleFolderModal} setFolderNameValue={setFolderNameValue} createFolder={createFolder}/>
         )}
 
         {editModal && (
@@ -184,6 +210,10 @@ function App() {
                 setEditTitleValue={setEditTitleValue}
                 editCoverUrl={editCoverUrl}
             />
+        )}
+
+        {removeModal && (
+            <RemoveModal removeModal={removeModal} toggleRemoveModal={toggleRemoveModal} removeFolder={removeFolder} />
         )}
 
     </div>
