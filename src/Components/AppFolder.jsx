@@ -9,8 +9,15 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
     const [inputValue, setInputValue] = useState(""); //valeur de l'input search
 
     //Filtre playlist avec la valeur de l'input search
-    const filteredPlaylist = folder.filter(p => p.title.toLowerCase().includes(inputValue));
-
+    const filteredPlaylist = folder.filter(p => {
+        if(p.folder){
+            if(p.title.toLowerCase().includes(inputValue)) return true; //titre du fichier
+            if(p.files.some(file => file.title.toLowerCase().includes(inputValue))) return true; //titre parmis .files du fichier
+            return false;
+        }
+        return p.title.toLowerCase().includes(inputValue); //titre de l'audio
+    });
+    
     //Récupère la valeur de l'input search
     function search(e){
         setInputValue(e.target.value.toLowerCase());
@@ -35,17 +42,17 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
                             onDragOver={dragOver}
                             onDrop={(e) => dragAddInFolder(e, audio)}
                         >
-                            <div className="app__folderAudio vertical glass audioPadding buttonText">
-                                <div className="horizontal">
+                            <div className="app__folderAudio vertical glass folderPadding buttonText">
+                                <div className="horizontal app__folderAudioFileName">
                                     <div>
-                                        <FontAwesomeIcon icon={faFolderOpen} className='app__icon' />
+                                        <FontAwesomeIcon icon={faFolderOpen} className='app__icon'/>
                                     </div>
                                     <div className="horizontal app__folderName">
                                         <div className="app__audioTitle paragraph">{audio.title}</div>
                                         <div className="paragraph">({audio.files.length})</div>
                                     </div>
                                 </div>
-                                <div className="vertical">
+                                <div className={`vertical smallGap ${audio.files.length > 0 ? "app__folderFiles" : ""}`}>
                                     {audio.files.map((file) =>(
                                         <div draggable className="app__folderAudio horizontal glass audioPadding buttonText">
                                             <div className="app__cover glass">

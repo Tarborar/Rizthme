@@ -94,10 +94,32 @@ function App() {
     function dragRemoveFolder(e){
         e.preventDefault();
 
-        //Conserve l'élément à supprimer pour le bouton Remove de la modale
-        setItemToRemove(JSON.parse(e.dataTransfer.getData('text/plain'))); 
+        const draggedAudio = JSON.parse(e.dataTransfer.getData('text/plain'));
+        console.log(draggedAudio);
+        
+        // //Si l'item dragged est un dossier
+        // if(draggedAudio.folder){
+        //     setItemToRemove(draggedAudio); //conserve l'élément à supprimer pour le bouton Remove de la modale
+        //     toggleRemoveModal();
+        // }else{
 
-        toggleRemoveModal();
+        // }
+
+        
+
+        /*
+        //Filtre playlist avec la valeur de l'input search
+        const filteredPlaylist = folder.filter(p => {
+        if(p.folder){
+            if(p.title.toLowerCase().includes(inputValue)) return true; //titre du fichier
+            if(p.files.some(file => file.title.toLowerCase().includes(inputValue))) return true; //titre parmis .files du fichier
+            return false;
+        }
+        return p.title.toLowerCase().includes(inputValue); //titre de l'audio
+    });
+    */
+
+        
     }
 
     //Supprime l'élément conservé de dragRemoveFolder()
@@ -177,8 +199,6 @@ function App() {
         .filter(item => item.id !== draggedAudio.id) //enlève l'item dragged de folder
         );
     }
-
-    console.log(folder);
 
     return (
     <div>

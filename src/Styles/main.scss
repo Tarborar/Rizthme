@@ -75,6 +75,11 @@ body::before {
     border-radius: $border-radius;
 }
 
+.folderPadding{
+    padding: 0 16px;
+    border-radius: $border-radius;
+}
+
 //Style
 .backgroundColor{
     position: fixed;
