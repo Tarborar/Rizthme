@@ -71,6 +71,8 @@ function App() {
         setFolder([...folder, newFile]); //push le nouveau fichier dans folder[]
     }
 
+    
+
     //Set les données pour le drop
     function dragStart(e, audio){
         e.dataTransfer.setData('text/plain', JSON.stringify(audio)); //obligé de convertir en chaine de caractère pour stocker l'élément glissé
@@ -95,36 +97,48 @@ function App() {
         e.preventDefault();
 
         const draggedAudio = JSON.parse(e.dataTransfer.getData('text/plain'));
-        console.log(draggedAudio);
-        
-        // //Si l'item dragged est un dossier
-        // if(draggedAudio.folder){
-        //     setItemToRemove(draggedAudio); //conserve l'élément à supprimer pour le bouton Remove de la modale
-        //     toggleRemoveModal();
-        // }else{
+        const draggedFileId = e.dataTransfer.getData('draggedFileId'); // récupère l'id du files[x] dragged
 
-        // }
-
-        
-
-        /*
-        //Filtre playlist avec la valeur de l'input search
-        const filteredPlaylist = folder.filter(p => {
-        if(p.folder){
-            if(p.title.toLowerCase().includes(inputValue)) return true; //titre du fichier
-            if(p.files.some(file => file.title.toLowerCase().includes(inputValue))) return true; //titre parmis .files du fichier
-            return false;
+        //Remove l'audio depuis un .files[x]
+        if(draggedAudio.folder && draggedFileId){
+            const file = draggedAudio.files.find(f => f.id === draggedFileId);
+            setItemToRemove(file);
         }
-        return p.title.toLowerCase().includes(inputValue); //titre de l'audio
-    });
-    */
+        //Remove l'audio normal
+        else {
+            setItemToRemove(draggedAudio);
+        }
 
-        
+        toggleRemoveModal();
     }
 
     //Supprime l'élément conservé de dragRemoveFolder()
     function removeFolder(){
-        setFolder(folder.filter(item => item.id !== itemToRemove.id));
+
+        //Si c'est un folder
+        if(itemToRemove.folder){
+            setFolder(folder.filter(f => f.id !== itemToRemove.id));
+            setItemToRemove(null);
+            return;
+        }
+
+        //Si c'est un file dans un folder
+        let newFolder = folder.map(f => {
+
+            if(f.folder){
+                return {
+                    ...f,
+                    files: f.files.filter(file => file.id !== itemToRemove.id)
+                };
+            }
+
+            return f;
+        });
+
+        //Si c'est hors d'un folder
+        newFolder = newFolder.filter(f => f.id !== itemToRemove.id);
+
+        setFolder(newFolder);
         setItemToRemove(null);
     }
 

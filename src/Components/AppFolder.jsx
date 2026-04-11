@@ -23,6 +23,13 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
         setInputValue(e.target.value.toLowerCase());
     }
 
+    //Récupère l'id du .files pour le cibler dans folder
+    function handleFileDragStart(e, file){
+        e.stopPropagation();
+        e.dataTransfer.setData('draggedFileId', file.id); //stock l'id dans draggedFiledId
+        dragStart(e, file);
+    }
+
     return(
         <div className='vertical smallGap'>
             <p className="app__folderTitle center">Folder</p>
@@ -37,7 +44,7 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
                         <div 
                             key={audio.id} 
                             className="folderGlass glass" 
-                            draggable 
+                            draggable
                             onDragStart={(e) => dragStart(e, audio)}
                             onDragOver={dragOver}
                             onDrop={(e) => dragAddInFolder(e, audio)}
@@ -54,7 +61,7 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
                                 </div>
                                 <div className={`vertical smallGap ${audio.files.length > 0 ? "app__folderFiles" : ""}`}>
                                     {audio.files.map((file) =>(
-                                        <div draggable className="app__folderAudio horizontal glass audioPadding buttonText">
+                                        <div draggable className="app__folderAudio horizontal glass audioPadding buttonText" onDragStart={(e) => handleFileDragStart(e, file)}>
                                             <div className="app__cover glass">
                                                 {file.cover && <img src={file.cover} alt="cover" className="app__audioCover"/>}
                                             </div>
