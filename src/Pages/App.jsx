@@ -71,8 +71,6 @@ function App() {
         setFolder([...folder, newFile]); //push le nouveau fichier dans folder[]
     }
 
-    
-
     //Set les données pour le drop
     function dragStart(e, audio){
         e.dataTransfer.setData('text/plain', JSON.stringify(audio)); //obligé de convertir en chaine de caractère pour stocker l'élément glissé
@@ -124,14 +122,12 @@ function App() {
 
         //Si c'est un file dans un folder
         let newFolder = folder.map(f => {
-
             if(f.folder){
                 return {
                     ...f,
                     files: f.files.filter(file => file.id !== itemToRemove.id)
                 };
             }
-
             return f;
         });
 
@@ -151,8 +147,18 @@ function App() {
     function dragEditFolder(e){
         e.preventDefault();
 
-        //Conserve l'élément à éditer pour le bouton Accept de la modale
-        setItemToEdit(JSON.parse(e.dataTransfer.getData('text/plain'))); 
+        const draggedAudio = JSON.parse(e.dataTransfer.getData('text/plain'));
+        const draggedFileId = e.dataTransfer.getData('draggedFileId'); // récupère l'id du files[x] dragged
+
+        //Remove l'audio depuis un .files[x]
+        if(draggedAudio.folder && draggedFileId){
+            const file = draggedAudio.files.find(f => f.id === draggedFileId);
+            setItemToEdit(file);
+        }
+        //Remove l'audio normal
+        else {
+            setItemToEdit(draggedAudio);
+        }
 
         toggleEditModal();
     }
@@ -160,10 +166,34 @@ function App() {
     //Edit l'élément conservé de dragEditFolder
     function editFolder(){
 
-        //Parcours folder pour changer title et cover édité
-        setFolder(folder.map(item =>
-        item.id === itemToEdit.id ? {... item, title: editTitleValue || itemToEdit.title, cover: editCoverUrl} : item));
+        
+        //Si c'est un folder
+        if(itemToEdit.folder){
+            //Parcours folder pour changer title et cover édité
+            setFolder(folder.map(item =>
+            item.id === itemToEdit.id ? {... item, title: editTitleValue || itemToEdit.title, cover: editCoverUrl} : item));
+            setItemToEdit(null);
+            return;
+        }
 
+        //Si c'est un file dans un folder
+        let newFolder = folder.map(f => {
+            if(f.folder){
+                return {
+                    ...f,
+                    files: f.files.map(item =>
+                        item.id === itemToEdit.id ? {... item, title: editTitleValue || itemToEdit.title, cover: editCoverUrl} : item
+                    )
+                };
+            }
+            return f;
+        });
+
+        //Si c'est hors d'un folder
+        newFolder = newFolder.map(item => item.id === itemToEdit.id ? {... item, title: editTitleValue || itemToEdit.title, cover: editCoverUrl} : item);
+
+        setFolder(newFolder);
+        
         //Reset les useState pour le prochain edit
         setItemToEdit(null); 
         setEditTitleValue("");
