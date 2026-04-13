@@ -67,7 +67,7 @@ function App() {
             "title": file.name,
             "cover": ""
         }
-
+        
         setFolder([...folder, newFile]); //push le nouveau fichier dans folder[]
     }
 
@@ -87,27 +87,40 @@ function App() {
         e.preventDefault();
         const draggedAudio = JSON.parse(e.dataTransfer.getData('text/plain'));
 
-        setQueue([...queue, draggedAudio]); //push l'item dans queue[]
+        if(draggedAudio.folder){
+            setQueue([...queue, ...draggedAudio.files]); //push tous les items de .files[] dans queue[]
+        }else{
+            const newAdd = {
+                "id": `${draggedAudio.title}-${queue.length+1}`,
+                "url": draggedAudio.url,
+                "title": draggedAudio.title,
+                "cover": draggedAudio.cover,
+                "queue": true
+            }
+
+            setQueue([...queue, newAdd]);
+        }
     }
 
     //Supprime du tableau folder[] l'item dragged
     function dragRemoveFolder(e){
         e.preventDefault();
-
+        
         const draggedAudio = JSON.parse(e.dataTransfer.getData('text/plain'));
         const draggedFileId = e.dataTransfer.getData('draggedFileId'); // récupère l'id du files[x] dragged
 
-        //Remove l'audio depuis un .files[x]
+        //Sélectionne l'audio depuis un .files[x]
         if(draggedAudio.folder && draggedFileId){
             const file = draggedAudio.files.find(f => f.id === draggedFileId);
             setItemToRemove(file);
         }
-        //Remove l'audio normal
+        //Sélectionne l'audio normal
         else {
             setItemToRemove(draggedAudio);
         }
 
         toggleRemoveModal();
+        console.log(draggedAudio);
     }
 
     //Supprime l'élément conservé de dragRemoveFolder()
@@ -150,12 +163,12 @@ function App() {
         const draggedAudio = JSON.parse(e.dataTransfer.getData('text/plain'));
         const draggedFileId = e.dataTransfer.getData('draggedFileId'); // récupère l'id du files[x] dragged
 
-        //Remove l'audio depuis un .files[x]
+        //Sélectionne l'audio depuis un .files[x]
         if(draggedAudio.folder && draggedFileId){
             const file = draggedAudio.files.find(f => f.id === draggedFileId);
             setItemToEdit(file);
         }
-        //Remove l'audio normal
+        //Sélectionne l'audio normal
         else {
             setItemToEdit(draggedAudio);
         }
@@ -166,7 +179,6 @@ function App() {
     //Edit l'élément conservé de dragEditFolder
     function editFolder(){
 
-        
         //Si c'est un folder
         if(itemToEdit.folder){
             //Parcours folder pour changer title et cover édité
@@ -244,6 +256,24 @@ function App() {
         );
     }
 
+    //Remove l'élement de queue s'il est dragged en dehors de app__main
+    function dragEnd(e, audio){
+
+        //Récupère la position de la souris à la fin du drag
+        const x = e.clientX;
+        const y = e.clientY;
+        
+        //Obtient l'élément sous la souris
+        const elementUnderCursor = document.elementsFromPoint(x, y);
+        
+        //Vérifie si l'élément a la classe .app__main
+        const isInsideAppMain = elementUnderCursor.some(element => element.classList?.contains('app__main'));
+        
+        if (!isInsideAppMain && audio.queue) {
+            setQueue(queue.filter(item => item.id !== audio.id));
+        }
+    }
+
     return (
     <div>
         <div className={`appDesign glass ${removeModal || editModal || folderModal ? "modalBackground" : ""}`}>
@@ -251,7 +281,7 @@ function App() {
                 <AppNavigation setAppMenu={setAppMenu}/>
                 <div className="app__main vertical">
                     <AudioPanel queue={queue} setQueue={setQueue}/>
-                    <AppQueue queue={queue} dragOver={dragOver} dragAddQueue={dragAddQueue} />
+                    <AppQueue queue={queue} dragOver={dragOver} dragAddQueue={dragAddQueue} dragStart={dragStart} dragEnd={dragEnd}/>
                     <AppAddingFile upload={upload} />
                 </div>
                 <div className="app__folder vertical">
