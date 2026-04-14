@@ -41,16 +41,16 @@ function App() {
     //Affichage de la page centrale de l'application
     switch(appMenu){
         case 'playlist':
-            //console.log(appMenu);
+            console.log(appMenu);
             break;
         case 'folder':
-            //console.log(appMenu);
+            console.log(appMenu);
             break;
         case 'help':
-            //console.log(appMenu);
+            console.log(appMenu);
             break;
         case 'discord':
-            //console.log(appMenu);
+            console.log(appMenu);
             break;
     }
 
@@ -75,7 +75,30 @@ function App() {
     function dragStart(e, audio){
         e.dataTransfer.setData('text/plain', JSON.stringify(audio)); //obligé de convertir en chaine de caractère pour stocker l'élément glissé
         e.dataTransfer.effectAllowed = 'move'; //dessine le curseur move
+
+        //Stock l'index uniquement pour queue[] pour permettre le reorder
+        if(audio.queue){
+            const index = queue.findIndex(item => item.id === audio.id);
+            e.dataTransfer.setData('text/index', index);
+            console.log(index);
+        }
     }
+
+    //Change d'emplacement l'audio dragged de queue[]
+    function dragReorderQueue(e, targetAudio) {
+        e.preventDefault();
+        
+        const startIndex = parseInt(e.dataTransfer.getData('text/index')); //index du dragged item
+        const endIndex = queue.findIndex(item => item.id === targetAudio.id); //index du drop
+        
+        if (startIndex === endIndex) return; //même emplacement
+        
+        const newQueue = [...queue];
+        const [movedItem] = newQueue.splice(startIndex, 1);
+        newQueue.splice(endIndex, 0, movedItem);
+
+        setQueue(newQueue);
+}
 
     function dragOver(e){
         e.preventDefault();
@@ -99,6 +122,24 @@ function App() {
             }
 
             setQueue([...queue, newAdd]);
+        }
+    }
+
+    //Remove l'élement de queue s'il est dragged en dehors de app__main
+    function dragOutQueue(e, audio){
+
+        //Récupère la position de la souris à la fin du drag
+        const x = e.clientX;
+        const y = e.clientY;
+        
+        //Obtient l'élément sous la souris
+        const elementUnderCursor = document.elementsFromPoint(x, y);
+        
+        //Vérifie si l'élément a la classe .app__main
+        const isInsideAppMain = elementUnderCursor.some(element => element.classList?.contains('app__main'));
+        
+        if (!isInsideAppMain && audio.queue) {
+            setQueue(queue.filter(item => item.id !== audio.id));
         }
     }
 
@@ -256,24 +297,6 @@ function App() {
         );
     }
 
-    //Remove l'élement de queue s'il est dragged en dehors de app__main
-    function dragEnd(e, audio){
-
-        //Récupère la position de la souris à la fin du drag
-        const x = e.clientX;
-        const y = e.clientY;
-        
-        //Obtient l'élément sous la souris
-        const elementUnderCursor = document.elementsFromPoint(x, y);
-        
-        //Vérifie si l'élément a la classe .app__main
-        const isInsideAppMain = elementUnderCursor.some(element => element.classList?.contains('app__main'));
-        
-        if (!isInsideAppMain && audio.queue) {
-            setQueue(queue.filter(item => item.id !== audio.id));
-        }
-    }
-
     return (
     <div>
         <div className={`appDesign glass ${removeModal || editModal || folderModal ? "modalBackground" : ""}`}>
@@ -281,7 +304,7 @@ function App() {
                 <AppNavigation setAppMenu={setAppMenu}/>
                 <div className="app__main vertical">
                     <AudioPanel queue={queue} setQueue={setQueue}/>
-                    <AppQueue queue={queue} dragOver={dragOver} dragAddQueue={dragAddQueue} dragStart={dragStart} dragEnd={dragEnd}/>
+                    <AppQueue queue={queue} dragOver={dragOver} dragAddQueue={dragAddQueue} dragStart={dragStart} dragOutQueue={dragOutQueue} dragReorderQueue={dragReorderQueue}/>
                     <AppAddingFile upload={upload} />
                 </div>
                 <div className="app__folder vertical">
@@ -294,7 +317,7 @@ function App() {
         {folderModal && (
             <FolderModal toggleFolderModal={toggleFolderModal} setFolderNameValue={setFolderNameValue} createFolder={createFolder}/>
         )}
-
+        
         {editModal && (
             <EditModal 
                 editFolder={editFolder} 
