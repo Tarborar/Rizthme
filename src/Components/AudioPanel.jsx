@@ -10,6 +10,7 @@ function AudioPanel({ queue, setQueue }){
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [isMuted, setIsMuted] = useState(false);
+    const [isLoop, setIsLoop] = useState(false); //vérifie l'état de loop sur audio
 
     //Récupère la durée de <audio>
     function loaded(){
@@ -60,6 +61,11 @@ function AudioPanel({ queue, setQueue }){
         setQueue(queue.slice(1));
     }
 
+    //Active et désactive loop de audio
+    function loop(){
+        setIsLoop(!isLoop);
+    }
+
     return(
         <div className="app__audiopanel">
             <audio 
@@ -69,6 +75,7 @@ function AudioPanel({ queue, setQueue }){
                 onTimeUpdate={timeUpdate}
                 onEnded={removeAudio}
                 autoPlay
+                loop={isLoop}
             />
             <div className="audiopanel glass horizontal smallGap">
                 <div>
@@ -94,7 +101,7 @@ function AudioPanel({ queue, setQueue }){
                     </div>
                     <input type="range" className="audiopanel__timeRange" min="0" max={duration} step="1" ref={timeRangeRef} onChange={changeTimeRange}/>
                 </div>
-                <FontAwesomeIcon icon={faArrowsRotate} className='audiopanel__icon loopButton'/>
+                <FontAwesomeIcon icon={faArrowsRotate} className={`audiopanel__icon loopButton ${isLoop ? 'rotate' : ''}`} onClick={loop}/>
             </div>
         </div>
     )

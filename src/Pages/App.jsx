@@ -39,20 +39,25 @@ function App() {
     const [folderNameValue, setFolderNameValue] = useState(""); //stock la valeur de l'input folderModal
 
     //Affichage de la page centrale de l'application
-    switch(appMenu){
-        case 'playlist':
-            console.log(appMenu);
-            break;
-        case 'folder':
-            console.log(appMenu);
-            break;
-        case 'help':
-            console.log(appMenu);
-            break;
-        case 'discord':
-            console.log(appMenu);
-            break;
-    }
+    const menuComponents = {
+        playlist: (
+            <>
+                <AudioPanel queue={queue} setQueue={setQueue}/>
+                <AppQueue queue={queue} dragOver={dragOver} dragAddQueue={dragAddQueue} dragStart={dragStart} dragOutQueue={dragOutQueue} dragReorderQueue={dragReorderQueue}/>
+                <AppAddingFile upload={upload} />
+            </>
+        ),
+        folder: (
+            <div className="app__mainTitle center">
+                <h3>Folder menu</h3>
+            </div>
+        ),
+        help: (
+            <div className="app__mainTitle center">
+                <h3>Folder help</h3>
+            </div>
+        )
+    };
 
     //Ajoute à folder[] le fichier ajouté
     function upload(e){
@@ -83,7 +88,7 @@ function App() {
             console.log(index);
         }
     }
-
+    
     //Change d'emplacement l'audio dragged de queue[]
     function dragReorderQueue(e, targetAudio) {
         e.preventDefault();
@@ -302,10 +307,9 @@ function App() {
         <div className={`appDesign glass ${removeModal || editModal || folderModal ? "modalBackground" : ""}`}>
             <div className="app horizontal glass">
                 <AppNavigation setAppMenu={setAppMenu}/>
+                {/* Menu central */}
                 <div className="app__main vertical">
-                    <AudioPanel queue={queue} setQueue={setQueue}/>
-                    <AppQueue queue={queue} dragOver={dragOver} dragAddQueue={dragAddQueue} dragStart={dragStart} dragOutQueue={dragOutQueue} dragReorderQueue={dragReorderQueue}/>
-                    <AppAddingFile upload={upload} />
+                    {menuComponents[appMenu] || null} 
                 </div>
                 <div className="app__folder vertical">
                     <AppFolder folder={folder} dragStart={dragStart} dragOver={dragOver} dragAddInFolder={dragAddInFolder}/>

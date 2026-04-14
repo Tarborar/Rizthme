@@ -19,7 +19,7 @@ function AppNavigation( {setAppMenu} ){
                 <li className='app__menuButton glass center' onClick={() => setAppMenu('help')}>
                     <FontAwesomeIcon icon={faQuestion} className='app__icon'/>
                 </li>
-                <li className='app__menuButton glass center' onClick={() => setAppMenu('discord')}>
+                <li className='app__menuButton glass center'>
                     <FontAwesomeIcon icon={faDiscord} className='app__icon'/>
                 </li>
             </ul>

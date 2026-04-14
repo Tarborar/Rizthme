@@ -39,6 +39,17 @@
     top: 50px;
     right: 25px;
     transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+
+    &.rotate{
+        transform: translate(-50%, -50%) rotate(360deg);
+        animation: spin 5s linear infinite
+    }
+}
+
+@keyframes spin {
+    from {transform: translate(-50%, -50%) rotate(0deg);}
+    to {transform: translate(-50%, -50%) rotate(360deg);}
 }
 
 .audiopanel__icon{
@@ -90,6 +101,8 @@
         margin-top: -6px;
     }
 }
+
+
     
 
     

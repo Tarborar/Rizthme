@@ -7,7 +7,7 @@ function AppQueue({ queue, dragOver, dragAddQueue, dragStart, dragOutQueue, drag
                 <div key={q.id} className="app__queue">
                     <div 
                         className="queue__folderAudio horizontal glass audioPadding buttonText" 
-                        draggable 
+                        draggable
                         onDragStart={(e) => dragStart(e, q)} 
                         onDragEnd={(e) => dragOutQueue(e, q)} 
                         onDragOver={dragOver} 
