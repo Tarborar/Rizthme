@@ -31,3 +31,17 @@
         cursor: pointer;
     }
 }
+
+@media screen and (max-width: 1024px){
+    .faq__button {
+        top: 350px;
+    }
+
+    .faq__title{
+        top: 450px;
+    }
+
+    .faq__paragraph{
+        top: 550px;
+    }
+}

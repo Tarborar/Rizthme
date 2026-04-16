@@ -1,75 +1,85 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../Styles/pages/Faq.scss';
-
-//Diamètre du cercle extérieur
-const size = 1100;
-const center = size / 2;
-const outerRadius = 520;
-
-//Diamètre du second cercle intérieur
-const innerRadius = 390;
-
-//Nombre de segment
-const segments = 3;
-
-//Amplitude de l'arc de cercle
-const spacing = 0.35;
-const startAngle = -Math.PI * (0.5 + spacing);
-const endAngle = -Math.PI * (0.5 - spacing);
-
-//Espace entre les segments
-const gapPx = 50;
-const gapAngle = gapPx / outerRadius;
-
-//Convertit les coordonnées (rayon, angle) en coordonnées (x, y) pour placer <path />
-function polarToCartesian(cx, cy, r, angle){
-    return {
-        x: cx + r * Math.cos(angle),
-        y: cy + r * Math.sin(angle),
-    }
-}
-
-function createSlicePath(i){
-    const totalAngle = endAngle - startAngle; //amplitude totale
-
-    const totalGap = gapAngle * (segments - 1); //amplitude totale des espaces
-
-    const usableAngle = totalAngle - totalGap; //amplitude totale des segments (sans les espaces)
-
-    const sliceAngle = usableAngle / segments; //amplitude de chaque segment[i]
-
-    const angleStart = startAngle + i * (sliceAngle + gapAngle); //position de départ du segment[i] + adapte le décalage pour segment[i+1]
-
-    const angleEnd = angleStart + sliceAngle; //position de fin du segment[i]
-
-    //Récupère les coordonnées (x, y) de fin et de début de l'arc[i] extérieur
-    const outerStart = polarToCartesian(center, center, outerRadius, angleStart);
-    const outerEnd = polarToCartesian(center, center, outerRadius, angleEnd);
-
-    //Récupère les coordonnées (x, y) de fin et de début de l'arc[i] intérieur
-    const innerStart = polarToCartesian(center, center, innerRadius, angleStart);
-    const innerEnd = polarToCartesian(center, center, innerRadius, angleEnd);
-
-    /*
-    (M)Move to
-    (A)Arc
-
-    (L)Line to
-    (A)Arc
-
-    (Z)Close path
-    */
-    return `
-        M ${outerStart.x} ${outerStart.y}
-        A ${outerRadius} ${outerRadius} 0 0 1 ${outerEnd.x} ${outerEnd.y}
-        L ${innerEnd.x} ${innerEnd.y}
-        A ${innerRadius} ${innerRadius} 0 0 0 ${innerStart.x} ${innerStart.y}
-        Z
-    `;
-}
 
 function Faq() {
     const [faqClicked, setFaqClicked] = useState(null);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    //Récupère la taille de l'écran pour le responsive
+    useEffect(() => {
+        const resize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', resize);
+        return () => window.removeEventListener('resize', resize);
+    }, []);
+
+    const isTablet = windowWidth < 1024;
+
+    //Diamètre du cercle extérieur
+    const size = isTablet ? 800 : 1100;
+    const center = size / 2;
+    const outerRadius = isTablet ? 300 : 520;
+
+    //Diamètre du second cercle intérieur
+    const innerRadius = isTablet ? 390 : 390;
+
+    //Nombre de segment
+    const segments = 3;
+
+    //Amplitude de l'arc de cercle
+    const spacing = 0.35;
+    const startAngle = -Math.PI * (0.5 + spacing);
+    const endAngle = -Math.PI * (0.5 - spacing);
+
+    //Espace entre les segments
+    const gapPx = isTablet ? 25 : 50;
+    const gapAngle = gapPx / outerRadius;
+
+    //Convertit les coordonnées (rayon, angle) en coordonnées (x, y) pour placer <path />
+    function polarToCartesian(cx, cy, r, angle){
+        return {
+            x: cx + r * Math.cos(angle),
+            y: cy + r * Math.sin(angle),
+        }
+    }
+
+    function createSlicePath(i){
+        const totalAngle = endAngle - startAngle; //amplitude totale
+
+        const totalGap = gapAngle * (segments - 1); //amplitude totale des espaces
+
+        const usableAngle = totalAngle - totalGap; //amplitude totale des segments (sans les espaces)
+
+        const sliceAngle = usableAngle / segments; //amplitude de chaque segment[i]
+
+        const angleStart = startAngle + i * (sliceAngle + gapAngle); //position de départ du segment[i] + adapte le décalage pour segment[i+1]
+
+        const angleEnd = angleStart + sliceAngle; //position de fin du segment[i]
+
+        //Récupère les coordonnées (x, y) de fin et de début de l'arc[i] extérieur
+        const outerStart = polarToCartesian(center, center, outerRadius, angleStart);
+        const outerEnd = polarToCartesian(center, center, outerRadius, angleEnd);
+
+        //Récupère les coordonnées (x, y) de fin et de début de l'arc[i] intérieur
+        const innerStart = polarToCartesian(center, center, innerRadius, angleStart);
+        const innerEnd = polarToCartesian(center, center, innerRadius, angleEnd);
+
+        /*
+        (M)Move to
+        (A)Arc
+
+        (L)Line to
+        (A)Arc
+
+        (Z)Close path
+        */
+        return `
+            M ${outerStart.x} ${outerStart.y}
+            A ${outerRadius} ${outerRadius} 0 0 1 ${outerEnd.x} ${outerEnd.y}
+            L ${innerEnd.x} ${innerEnd.y}
+            A ${innerRadius} ${innerRadius} 0 0 0 ${innerStart.x} ${innerStart.y}
+            Z
+        `;
+    }
 
     let inputContent;
     let titleContent;

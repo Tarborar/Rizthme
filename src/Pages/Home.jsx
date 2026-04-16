@@ -11,9 +11,10 @@ function Home() {
             <FontAwesomeIcon icon={faDiscord} className='discordIcon'/>
             Ouvrir
         </button>
-        <div className='logo'>
+        <div className='home__logo logo'>
             <img src={Logo} alt="Logo" />
         </div>
+        <button className='home__buttonConnection buttonPadding buttonText'>Connection</button>
     </div>
   )
 }

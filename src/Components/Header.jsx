@@ -6,7 +6,7 @@ function Header(){
     return(
         <header className='horizontal'>
             <Link to="/"><img src={LogoNav} alt="Logo Rizthme"  className='logoNav'/></Link>
-            <nav className="header__nav center">
+            <nav className="header__nav">
                 <ul className="center glass gap buttonPadding">
                     <Link to="app"><li>App</li></Link>
                     <Link to="features"><li>Features</li></Link>

@@ -1,3 +1,33 @@
+@import '../utils/variables.scss';
+
 .home__button{
     gap: 10px;
+}
+
+.home__buttonConnection{
+    display: none;
+    background-color: $main-color;
+    color: white;
+}
+
+@media screen and (max-width: 1024px){
+    .home{
+        gap: 24px !important;
+    }
+
+    .home__buttonConnection{
+        display: block;
+    }
+        
+    .home__logo{
+        order: 1;
+    }
+    
+    .home__button {
+        order: 2;
+    }
+    
+    .home__buttonConnection {
+        order: 3;
+    }
 }

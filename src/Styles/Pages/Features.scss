@@ -10,3 +10,9 @@
 .features__cardUp{
     transform: translateY(-100px);
 }
+
+@media screen and (max-width: 1024px){
+    .featuress__cards{
+        gap: 24px !important;
+    }
+}

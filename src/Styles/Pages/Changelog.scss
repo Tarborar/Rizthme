@@ -16,3 +16,15 @@
     padding: 32px;
     border-radius: 17px;
 }
+
+@media screen and (max-width: 1024px){
+    .changelog__container{
+        flex-direction: column !important;
+    }
+
+    .changelog__date{
+        justify-content: start;
+        width: fit-content;
+        flex: auto;
+    }
+}

@@ -43,7 +43,7 @@ function App() {
         playlist: (
             <>
                 <AudioPanel queue={queue} setQueue={setQueue}/>
-                <AppQueue queue={queue} dragOver={dragOver} dragAddQueue={dragAddQueue} dragStart={dragStart} dragOutQueue={dragOutQueue} dragReorderQueue={dragReorderQueue}/>
+                <AppQueue queue={queue} setQueue={setQueue} dragOver={dragOver} dragAddQueue={dragAddQueue} dragStart={dragStart} dragOutQueue={dragOutQueue} dragReorderQueue={dragReorderQueue}/>
                 <AppAddingFile upload={upload} />
             </>
         ),
@@ -88,7 +88,7 @@ function App() {
             console.log(index);
         }
     }
-    
+
     //Change d'emplacement l'audio dragged de queue[]
     function dragReorderQueue(e, targetAudio) {
         e.preventDefault();

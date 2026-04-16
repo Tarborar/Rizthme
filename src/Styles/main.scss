@@ -5,10 +5,8 @@
 html{
     max-width: 1324px;
     margin: 0 auto;
-    
-    overflow-x: hidden;
-    // overflow-y: hidden;
 }
+
 body{
     position: relative;
     background-color: #0C0104;
@@ -22,6 +20,8 @@ body{
     background-image: linear-gradient(to right, rgba(255, 16, 73, 0.04), 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 16, 73, 0.04), 1px, transparent 1px); 
     z-index: -2;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 body::before {
@@ -138,3 +138,8 @@ h1, h2{
     font-size: 21px;
 }
 
+@media screen and (max-width: 1024px){
+    body{
+        padding: 24px;
+    }
+}
