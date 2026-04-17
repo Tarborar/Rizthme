@@ -2,6 +2,11 @@
     position: relative;
 }
 
+.faq-svg{
+    max-width: 100%;
+    height: auto;
+}
+
 .faq__button {
     position: absolute;
     top: 400px;
@@ -43,5 +48,23 @@
 
     .faq__paragraph{
         top: 550px;
+    }
+}
+
+@media screen and (max-width: 767px){
+    .faq{
+        gap: 25px !important;
+    }
+
+    .faq__button {
+        top: 200px;
+    }
+
+    .faq__title{
+        top: 275px;
+    }
+
+    .faq__paragraph{
+        top: 350px;
     }
 }

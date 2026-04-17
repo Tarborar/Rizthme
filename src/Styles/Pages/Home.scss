@@ -31,3 +31,10 @@
         order: 3;
     }
 }
+
+@media screen and (max-width: 767px){
+    .home__logo{
+        width: 66% !important;
+    }
+}
+

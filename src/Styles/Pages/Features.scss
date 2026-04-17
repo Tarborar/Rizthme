@@ -12,7 +12,28 @@
 }
 
 @media screen and (max-width: 1024px){
-    .featuress__cards{
+    .features__cards{
         gap: 24px !important;
+    }
+}
+
+@media screen and (max-width: 767px){
+    .features{
+        gap: 16px !important;
+    }
+
+    .features__cards{
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+
+    .features__card{
+        padding: 16px;
+        max-width: none;
+        gap: 16px;
+    }
+
+    .features__cardUp{
+        transform: translateY(0);
     }
 }

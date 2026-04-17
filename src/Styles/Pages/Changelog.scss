@@ -28,3 +28,13 @@
         flex: auto;
     }
 }
+
+@media screen and (max-width: 767px){
+    .changelog__container, .changelog__info{
+        gap: 25px !important;
+    }
+
+    .changelog__paragraph{
+        padding: 16px;
+    }
+}

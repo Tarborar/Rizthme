@@ -8,7 +8,7 @@ function Features() {
         <div className='logo'>
             <img src={Logo} alt="Logo" />
         </div>
-        <div className='featuress__cards horizontal gap'>
+        <div className='features__cards horizontal gap'>
             <div className='features__card glass features__cardUp'>
                 <h3 className='smallTitle'>Playlist</h3>
                 <p className="paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing</p>

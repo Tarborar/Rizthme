@@ -39,3 +39,25 @@ header{
         gap: 25px;
     }
 }
+
+@media screen and (max-width: 767px){
+    header{
+        gap: 16px;
+        margin-bottom: 25px;
+    }
+
+    .header__nav{
+        justify-content: center;
+    }
+
+    .header__nav>ul{
+        gap: 0;
+        padding: 0 16px !important;
+    }
+
+    .header__nav>ul>*{
+        font-size: 16px;
+        color: white;
+    }
+}
+

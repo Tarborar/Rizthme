@@ -1,26 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import '../Styles/pages/Faq.scss';
+import useWindowWidth from '../hooks/useWindowWidth';
 
 function Faq() {
     const [faqClicked, setFaqClicked] = useState(null);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    //Récupère la taille de l'écran pour le responsive
-    useEffect(() => {
-        const resize = () => setWindowWidth(window.innerWidth);
-        window.addEventListener('resize', resize);
-        return () => window.removeEventListener('resize', resize);
-    }, []);
-
+    const windowWidth = useWindowWidth();
     const isTablet = windowWidth < 1024;
+    const isMobile = windowWidth < 767;
 
     //Diamètre du cercle extérieur
-    const size = isTablet ? 800 : 1100;
+    const size = isMobile ? 410 : (isTablet ? 800 : 1100);
     const center = size / 2;
-    const outerRadius = isTablet ? 300 : 520;
+    const outerRadius = isMobile ? 140 : (isTablet ? 300 : 520);
 
     //Diamètre du second cercle intérieur
-    const innerRadius = isTablet ? 390 : 390;
+    const innerRadius = isMobile ? 190 : (isTablet ? 390 : 390);
 
     //Nombre de segment
     const segments = 3;
@@ -31,7 +26,7 @@ function Faq() {
     const endAngle = -Math.PI * (0.5 - spacing);
 
     //Espace entre les segments
-    const gapPx = isTablet ? 25 : 50;
+    const gapPx = isMobile ? 16 : (isTablet ? 25 : 50);
     const gapAngle = gapPx / outerRadius;
 
     //Convertit les coordonnées (rayon, angle) en coordonnées (x, y) pour placer <path />
@@ -99,7 +94,7 @@ function Faq() {
         case 2:
             inputContent = "Menu 3";
             titleContent = "Est-ce que c'est gratuit ?"
-            answerContent = " Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam consectetuer adipiscing elit, sed diam nonummy nibh consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam consectetuer adipiscing elit, sed diam nonummy nibh"
+            answerContent = " Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam consectetuer adipiscing elit, sed diam nonummy nibh consectetuer adipiscing elit, sed diam"
             break;
         default:
             inputContent = "Une question ?";
@@ -112,8 +107,6 @@ function Faq() {
         <div className="faq vertical center gap">
             <h2>FAQ</h2>
             <svg
-                width={size}
-                height={size}
                 viewBox={`0 0 ${size} ${size}`}
                 className="faq-svg"
             >

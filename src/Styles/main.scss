@@ -67,6 +67,10 @@ body::before {
     padding: $button-padding;
     height: $button-heightDesktop;
     border-radius: $border-radius;
+
+    @media screen and (max-width: 767px){
+        height: 48px;
+    }
 }
 
 .audioPadding{
@@ -141,5 +145,23 @@ h1, h2{
 @media screen and (max-width: 1024px){
     body{
         padding: 24px;
+    }
+}
+
+@media screen and (max-width: 767px){
+    body{
+        padding: 16px;
+    }
+
+    h1, h2{
+        font-size: 28px;
+    }
+
+    .smallTitle{
+        font-size: 28px;
+    }
+
+    .paragraph{
+        font-size: 16px;
     }
 }
