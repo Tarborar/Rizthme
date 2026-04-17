@@ -13,3 +13,9 @@
     cursor: pointer;
     // border: dashed 2px rgba($color: white, $alpha: 0.05) !important;
 }
+
+@media screen and (max-width: 1024px){
+    .app__edit{
+        margin: 25px;
+    }
+}

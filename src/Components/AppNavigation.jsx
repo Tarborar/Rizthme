@@ -1,4 +1,5 @@
 import '../Styles/components/AppNavigation.scss'
+import useWindowWidth from '../hooks/useWindowWidth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
@@ -6,10 +7,15 @@ import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 
-function AppNavigation( {setAppMenu} ){
+function AppNavigation({ setAppMenu }){
+
+    const windowWidth = useWindowWidth(); //récupère la taille de l'écran pour le responsive
+    const isTablet = windowWidth < 1024;
+    const isMobile = windowWidth < 767;
+
     return(
         <nav className="app__menu">
-            <ul className="vertical smallGap">
+            <ul className={`${isTablet ? 'horizontal' : 'vertical'} smallGap`}>
                 <li className='app__menuButton glass center' onClick={() => setAppMenu('playlist')}>
                     <FontAwesomeIcon icon={faPlay} className='app__icon'/>
                 </li>

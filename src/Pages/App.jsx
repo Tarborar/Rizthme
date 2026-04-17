@@ -14,6 +14,7 @@ import FolderModal from "../components/FolderModal";
 
 //Hook
 import { useState } from 'react';
+import useWindowWidth from "../hooks/useWindowWidth";
 
 //CSS
 import '../Styles/pages/App.scss'
@@ -38,6 +39,10 @@ function App() {
 
     const [folderNameValue, setFolderNameValue] = useState(""); //stock la valeur de l'input folderModal
 
+    const windowWidth = useWindowWidth(); //récupère la taille de l'écran pour le responsive
+    const isTablet = windowWidth < 1024;
+    const isMobile = windowWidth < 767;
+
     //Affichage de la page centrale de l'application
     const menuComponents = {
         playlist: (
@@ -48,9 +53,10 @@ function App() {
             </>
         ),
         folder: (
-            <div className="app__mainTitle center">
-                <h3>Folder menu</h3>
-            </div>
+            <>
+                <AppFolder folder={folder} dragStart={dragStart} dragOver={dragOver} dragAddInFolder={dragAddInFolder}/>
+                <AppEdit dragOver={dragOver} dragRemoveFolder={dragRemoveFolder} dragEditFolder={dragEditFolder} toggleFolderModal={toggleFolderModal}/>
+            </>
         ),
         help: (
             <div className="app__mainTitle center">
@@ -304,17 +310,20 @@ function App() {
 
     return (
     <div>
+        {isTablet ? <AppNavigation setAppMenu={setAppMenu} /> : null} 
         <div className={`appDesign glass ${removeModal || editModal || folderModal ? "modalBackground" : ""}`}>
             <div className="app horizontal glass">
-                <AppNavigation setAppMenu={setAppMenu}/>
+                {isTablet ? null : <AppNavigation setAppMenu={setAppMenu} />} 
                 {/* Menu central */}
                 <div className="app__main vertical">
                     {menuComponents[appMenu] || null} 
                 </div>
-                <div className="app__folder vertical">
-                    <AppFolder folder={folder} dragStart={dragStart} dragOver={dragOver} dragAddInFolder={dragAddInFolder}/>
-                    <AppEdit dragOver={dragOver} dragRemoveFolder={dragRemoveFolder} dragEditFolder={dragEditFolder} toggleFolderModal={toggleFolderModal}/>
-                </div>
+                {isTablet ? null : (
+                    <div className="app__folder vertical">
+                        <AppFolder folder={folder} dragStart={dragStart} dragOver={dragOver} dragAddInFolder={dragAddInFolder}/>
+                        <AppEdit dragOver={dragOver} dragRemoveFolder={dragRemoveFolder} dragEditFolder={dragEditFolder} toggleFolderModal={toggleFolderModal}/>
+                    </div>
+                )}
             </div>
         </div>
 

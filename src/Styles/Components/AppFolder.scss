@@ -80,3 +80,30 @@
     padding-bottom: 16px;
     width: 100%;
 }
+
+@media screen and (max-width: 1024px){
+    .app__folder{
+        width: 100%;
+    }
+
+    .test{
+        margin-top: 25px;
+    }
+
+    .app__folderInput{
+        display: flex;
+        justify-content: center;
+    }
+
+    .app__folderInputText{
+        width: 50%;
+    }
+
+    .app__folderInputIcon{
+        left: 30%;
+    }
+
+    .app__folderList{
+        max-height: 420px;
+    }
+}

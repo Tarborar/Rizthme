@@ -10,3 +10,21 @@
     height: 75px;
     border-radius: $border-radius;
 }
+
+@media screen and (max-width: 1024px){
+    .app__menu{
+        border: none;
+        padding: 0;
+        margin-bottom: 16px;
+    }
+
+    .app__menu>ul{
+        gap: 16px;
+    }
+
+    .app__menuButton{
+        margin: initial !important;
+        width: $button-heightDesktop;
+        height: $button-heightDesktop;
+    }
+}

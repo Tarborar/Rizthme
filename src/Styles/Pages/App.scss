@@ -16,7 +16,6 @@
     height: 80vh;
     justify-content: space-between;
     border-radius: $border-radius;
-    
 }
 
 .app__icon{
@@ -39,4 +38,10 @@
 
 .app__mainTitle{
     padding: 25px;
+}
+
+@media screen and (max-width: 1024px){
+    .app{
+        height: 75vh;
+    }
 }
