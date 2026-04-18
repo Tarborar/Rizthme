@@ -28,3 +28,10 @@
         height: $button-heightDesktop;
     }
 }
+
+@media screen and (max-width: 767px){
+    .app__menu{
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -54,13 +54,18 @@ function App() {
         ),
         folder: (
             <>
-                <AppFolder folder={folder} dragStart={dragStart} dragOver={dragOver} dragAddInFolder={dragAddInFolder}/>
-                <AppEdit dragOver={dragOver} dragRemoveFolder={dragRemoveFolder} dragEditFolder={dragEditFolder} toggleFolderModal={toggleFolderModal}/>
+                {isTablet ? (
+                    <AppFolder folder={folder} dragStart={dragStart} dragOver={dragOver} dragAddInFolder={dragAddInFolder}/>
+                ) : (
+                    <div className="app__mainTitle center">
+                        <h3 className="smallTitle">Folder</h3>
+                    </div>
+                )}
             </>
         ),
         help: (
             <div className="app__mainTitle center">
-                <h3>Folder help</h3>
+                <h3 className="smallTitle">Help</h3>
             </div>
         )
     };

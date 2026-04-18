@@ -27,7 +27,7 @@
         background-color: rgba($color: white, $alpha: 0);
         width: 4px;
     }
-
+    
     &::-webkit-scrollbar-track{
         width: 4px;
     }
@@ -86,8 +86,8 @@
         width: 100%;
     }
 
-    .test{
-        margin-top: 25px;
+    .app__folderTitle{
+        padding-top: 25px;
     }
 
     .app__folderInput{
@@ -104,6 +104,26 @@
     }
 
     .app__folderList{
-        max-height: 420px;
+        max-height: 570px;
+    }
+}
+
+@media screen and (max-width: 767px){
+    .app__folderTitle{
+        padding-top: 16px;
+    }
+
+    .app__folderInputText{
+        width: 100%;
+        margin: 0 16px;
+    }
+
+    .app__folderInputIcon{
+        left: 15%;
+    }
+
+    .app__folderList{
+        padding: 0 16px;
+        max-height: 280px;
     }
 }

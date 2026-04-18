@@ -99,7 +99,7 @@ function AudioPanel({ queue, setQueue }){
                         </div>
                         <div className="audiopanel__time">{Math.floor(currentTime/60)}:{Math.floor(currentTime%60)} / {Math.floor(duration/60)}:{Math.floor(duration%60)}</div>
                     </div>
-                    <input type="range" className="audiopanel__timeRange" min="0" max={duration} step="1" ref={timeRangeRef} onChange={changeTimeRange}/>
+                    <input type="range" className="audiopanel__timeRange" min="0" max={duration} step="1" ref={timeRangeRef} onChange={changeTimeRange} />
                 </div>
                 <FontAwesomeIcon icon={faArrowsRotate} className={`audiopanel__icon loopButton ${isLoop ? 'rotate' : ''}`} onClick={loop}/>
             </div>

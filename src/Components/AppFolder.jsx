@@ -31,7 +31,7 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
     }
 
     return(
-        <div className='vertical smallGap test'>
+        <div className='vertical smallGap'>
             <p className="app__folderTitle center">Folder</p>
             <div className="app__folderInput">
                 <input type="search" className='glass buttonPadding buttonText app__folderInputText' onInput={search}/>

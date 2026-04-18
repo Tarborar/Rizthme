@@ -15,3 +15,10 @@ input[type="file"] {
     border-radius: $border-radius;
     cursor: pointer;
 }
+
+@media screen and (max-width: 767px){
+    .app__add{
+        padding: 16px;
+        border: none;
+    }
+}
