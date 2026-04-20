@@ -77,9 +77,9 @@ function AudioPanel({ queue, setQueue }){
                 autoPlay
                 loop={isLoop}
             />
-            <div className="audiopanel glass horizontal smallGap">
+            <div className="audiopanel glass glassHover horizontal smallGap">
                 <div>
-                    <div className="audiopanel__cover glass"></div>
+                    <div className="audiopanel__cover"></div>
                 </div>
                 <div className="audiopanel__info">
                     <p className="audiopanel__title paragraph">{queue[0]? queue[0].title : "Waiting for a music.."}</p>

@@ -18,14 +18,14 @@ function Changelog() {
             {
                 changelogList.map((c) => (
                     <div key={c.date} className="changelog__container horizontal gap">
-                        <div className="glass changelog__date buttonPadding buttonText">
+                        <div className="glass glassHover changelog__date buttonPadding buttonText">
                             {c.date}
                         </div>
                         <div className="changelog__info vertical gap">
                             <h3 className="changelog__title smallTitle">
                                 {c.title}
                             </h3>
-                            <p className="changelog__paragraph paragraph glass">
+                            <p className="changelog__paragraph paragraph glass glassHover">
                                 {/* Parcoure le tableau "paragraphs" pour le saut à la ligne entre chaque paragraphe */}
                                 {c.paragraphs.map((p, i) => ( 
                                     <span key={i}>

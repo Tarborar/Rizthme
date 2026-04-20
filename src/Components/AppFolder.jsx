@@ -34,7 +34,7 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
         <div className='vertical smallGap'>
             <p className="app__folderTitle center">Folder</p>
             <div className="app__folderInput">
-                <input type="search" className='glass buttonPadding buttonText app__folderInputText' onInput={search}/>
+                <input type="search" className='buttonPadding buttonText app__folderInputText' onInput={search}/>
                 <FontAwesomeIcon icon={faMagnifyingGlass} className='app__icon app__folderInputIcon'/>
             </div>
             <div className="app__folderList vertical smallGap">
@@ -49,7 +49,7 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
                             onDragOver={dragOver}
                             onDrop={(e) => dragAddInFolder(e, audio)}
                         >
-                            <div className="app__folderAudio vertical glass folderPadding buttonText">
+                            <div className="app__folderAudio vertical glass glassHover folderPadding buttonText">
                                 <div className="horizontal app__folderAudioFileName">
                                     <div>
                                         <FontAwesomeIcon icon={faFolderOpen} className='app__icon'/>
@@ -75,8 +75,8 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
                     //Si c'est un audio
                     (
                         <div key={audio.id}>
-                            <div draggable className="app__folderAudio horizontal glass audioPadding buttonText" onDragStart={(e) => dragStart(e, audio)}>
-                                <div className="app__cover glass">
+                            <div draggable className="app__folderAudio horizontal glass glassHover audioPadding buttonText" onDragStart={(e) => dragStart(e, audio)}>
+                                <div className="app__cover">
                                     {audio.cover && <img src={audio.cover} alt="cover" className="app__audioCover"/>}
                                 </div>
                                 <div className="app__audioTitle paragraph">{audio.title}</div>

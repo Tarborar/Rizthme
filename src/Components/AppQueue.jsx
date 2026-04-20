@@ -23,13 +23,13 @@ function AppQueue({ queue, setQueue, dragOver, dragAddQueue, dragStart, dragOutQ
             {queue.map((q) =>(
                 <div key={q.id} className="app__queue">
                     <div 
-                        className="queue__folderAudio horizontal glass audioPadding buttonText" 
+                        className="queue__folderAudio horizontal glass glassHover audioPadding buttonText" 
                         draggable
                         onDragStart={(e) => dragStart(e, q)} 
                         onDragEnd={(e) => dragOutQueue(e, q)} 
                         onDragOver={dragOver} 
                         onDrop={(e) => dragReorderQueue(e, q)}>
-                        <div className="queue__cover glass">
+                        <div className="queue__cover ">
                             {q.cover && <img src={q.cover} alt="cover" className="queue__audioCover"/>}
                         </div>
                         <div className="queue__audioTitle paragraph">{q.title}</div>

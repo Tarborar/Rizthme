@@ -9,17 +9,37 @@ header{
 .header__nav>ul>*{
     font-size: 21px;
     color: white;
+
+    transition: all 0.1s ease;
+    &:hover{
+        filter: drop-shadow(0 0 15px rgba(255, 16, 73, 0.75));
+        font-weight: 800px;
+    }
 }
 
 .logoNav{
     height: 36px;
     width: auto;
+
+    transition: scale 0.3s ease;
+    &:hover{
+        scale: calc(1.03);
+    }
 }
 
 .header__buttonConnection{
     background-color: $main-color;
     color: white;
+
+    transition: all 0.3s ease;
+    &:hover{
+        background-color: transparent;
+        box-shadow: 0 0 0 1px $main-color;
+        cursor: pointer;
+    }
 }
+
+
 
 @media screen and (max-width: 1024px){
     header{

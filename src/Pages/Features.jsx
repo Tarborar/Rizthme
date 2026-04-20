@@ -9,15 +9,15 @@ function Features() {
             <img src={Logo} alt="Logo" />
         </div>
         <div className='features__cards horizontal gap'>
-            <div className='features__card glass features__cardUp'>
+            <div className='features__card glass glassHover features__cardUp'>
                 <h3 className='smallTitle'>Playlist</h3>
                 <p className="paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
             </div>
-            <div className='features__card glass'>
+            <div className='features__card glass glassHover'>
                 <h3 className='smallTitle'>Interactif</h3>
                 <p className="paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
             </div>
-            <div className='features__card glass features__cardUp'>
+            <div className='features__card glass glassHover features__cardUp'>
                 <h3 className='smallTitle'>Sans pub</h3>
                 <p className="paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
             </div>

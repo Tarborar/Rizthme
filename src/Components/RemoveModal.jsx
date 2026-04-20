@@ -5,11 +5,11 @@ function RemoveModal({ toggleRemoveModal, removeFolder }){
         <div className="removeModal glass vertical gap">
             <p className="smallTitle">Are you sure you want to remove this file ?</p>
             <div className="horizontal gap removeModal__buttons">
-                <button className="glass buttonPadding buttonText" onClick={ () =>{
+                <button className="glass glassHover buttonPadding buttonText" onClick={ () =>{
                     removeFolder();
                     toggleRemoveModal();
                 }}>Remove</button>
-                <button className="glass buttonPadding buttonText" onClick={toggleRemoveModal}>Cancel</button>
+                <button className="glass glassHover buttonPadding buttonText" onClick={toggleRemoveModal}>Cancel</button>
             </div>
         </div>
     )

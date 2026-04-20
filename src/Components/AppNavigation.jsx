@@ -16,16 +16,16 @@ function AppNavigation({ setAppMenu }){
     return(
         <nav className="app__menu">
             <ul className={`${isTablet ? 'horizontal' : 'vertical'} smallGap`}>
-                <li className='app__menuButton glass center' onClick={() => setAppMenu('playlist')}>
+                <li className='app__menuButton glass glassHover center' onClick={() => setAppMenu('playlist')}>
                     <FontAwesomeIcon icon={faPlay} className='app__icon'/>
                 </li>
-                <li className='app__menuButton glass center' onClick={() => setAppMenu('folder')}>
+                <li className='app__menuButton glass glassHover center' onClick={() => setAppMenu('folder')}>
                     <FontAwesomeIcon icon={faFolderOpen} className='app__icon'/>
                 </li>
-                <li className='app__menuButton glass center' onClick={() => setAppMenu('help')}>
+                <li className='app__menuButton glass glassHover center' onClick={() => setAppMenu('help')}>
                     <FontAwesomeIcon icon={faQuestion} className='app__icon'/>
                 </li>
-                <li className='app__menuButton glass center'>
+                <li className='app__menuButton glass glassHover center'>
                     <FontAwesomeIcon icon={faDiscord} className='app__icon'/>
                 </li>
             </ul>

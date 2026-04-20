@@ -59,6 +59,10 @@ audio::-webkit-media-controls-enclosure {
     width: 30px;
     height: 30px;
     border-radius: 8px;
+
+    background-color: rgba($color: white, $alpha: 0.02);
+    border: solid 1px rgba($color: white, $alpha: 0.05);
+    z-index: 0;
 }
 
 .queue__audioCover{

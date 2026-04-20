@@ -13,17 +13,17 @@ function FolderModal({ toggleFolderModal, setFolderNameValue, createFolder }){
         <div className="folderModal glass vertical gap">
             <p className="smallTitle">Create folder</p>
             <div className="horizontal smallGap">
-                <div className='folderModalIcon glass center'>
+                <div className='folderModalIcon glass glassHover center'>
                     <FontAwesomeIcon icon={faFolderOpen} className='app__icon' />
                 </div>
-                <input type="text" placeholder="New folder" className='glass audioPadding buttonText' onInput={getFolderName} />
+                <input type="text" placeholder="New folder" className='folderModal__inputText audioPadding buttonText' onInput={getFolderName} />
             </div>
             <div className="horizontal gap folderModal__buttons">
-                <button className="glass buttonPadding buttonText" onClick={ () =>{
+                <button className="glass glassHover buttonPadding buttonText" onClick={ () =>{
                     createFolder();
                     toggleFolderModal();
                 }}>Accept</button>
-                <button className="glass buttonPadding buttonText" onClick={toggleFolderModal}>Cancel</button>
+                <button className="glass glassHover buttonPadding buttonText" onClick={toggleFolderModal}>Cancel</button>
             </div>
         </div>
     )

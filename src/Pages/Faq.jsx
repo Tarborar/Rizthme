@@ -121,9 +121,9 @@ function Faq() {
                 ))}
             </svg>
             
-            <button className='faq__button glass buttonPadding buttonText'>{inputContent}</button>
+            <button className='faq__button glass glassHover buttonPadding buttonText'>{inputContent}</button>
             <h3 className='faq__title smallTitle'>{titleContent}</h3>
-            <p className='faq__paragraph paragraph glass'>{answerContent}</p>
+            <p className='faq__paragraph paragraph glass glassHover'>{answerContent}</p>
         </div>
     )
 }

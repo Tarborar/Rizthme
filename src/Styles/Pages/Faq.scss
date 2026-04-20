@@ -30,6 +30,7 @@
     stroke: rgba($color: white, $alpha: 0.05);
     stroke-linecap: round;
 
+    transition: all 0.2s ease;
     &:hover{
         filter: drop-shadow(0 0 5px rgba(255, 16, 73, 1));
         stroke: white;

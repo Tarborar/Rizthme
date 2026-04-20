@@ -7,7 +7,7 @@ function Home() {
     return (
     <div className="home center gap vertical">
         <h1>Elevate your conversation with bot music</h1>
-        <button className="home__button glass buttonPadding buttonText center">
+        <button className="home__button glass glassHover buttonPadding buttonText center">
             <FontAwesomeIcon icon={faDiscord} className='discordIcon'/>
             Ouvrir
         </button>
