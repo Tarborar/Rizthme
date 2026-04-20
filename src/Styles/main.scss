@@ -39,6 +39,25 @@ body::before {
     pointer-events: none;
 }
 
+.gridDot {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background-color: $main-color;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    
+    box-shadow: 
+        0 0 2px #FF1049,
+        0 0 8px #FF1049,
+        0 0 16px rgba(255, 16, 73, 0.8),
+        0 0 24px rgba(255, 16, 73, 0.6),
+        0 0 32px rgba(255, 16, 73, 0.4),
+        0 0 40px rgba(255, 16, 73, 0.2);
+}
+
 //Position
 .horizontal{
     display: flex;

@@ -11,11 +11,13 @@ import Faq from './pages/Faq.jsx'
 import Error from './pages/Error.jsx'
 
 import './Styles/main.scss'
+import GridEffect from './components/GridEffect.jsx'
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <Router>
             <div className='backgroundColor'></div>
+            <GridEffect />
             <Header />
             <Routes>
                 <Route path="/" element={<Home />}></Route>

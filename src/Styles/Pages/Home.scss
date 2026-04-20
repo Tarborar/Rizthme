@@ -8,6 +8,13 @@
     display: none;
     background-color: $main-color;
     color: white;
+
+    transition: all 0.3s ease;
+    &:hover{
+        background-color: transparent;
+        box-shadow: 0 0 0 1px $main-color;
+        cursor: pointer;
+    }
 }
 
 @media screen and (max-width: 1024px){
