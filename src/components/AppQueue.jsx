@@ -1,9 +1,13 @@
+import { useReveal } from '../hooks/useReveal';
+import '../Styles/utils/revealAnimation.scss';
+
 import "../Styles/components/AppQueue.scss";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShuffle } from '@fortawesome/free-solid-svg-icons';
 
 function AppQueue({ queue, setQueue, dragOver, dragAddQueue, dragStart, dragOutQueue, dragReorderQueue}){
+    useReveal();
 
     //Shuffle la queue
     function shuffleQueue(array){
@@ -36,7 +40,7 @@ function AppQueue({ queue, setQueue, dragOver, dragAddQueue, dragStart, dragOutQ
                     </div>
                 </div>
             ))}
-            <div className="app__playlistSlot" onDragOver={dragOver} onDrop={dragAddQueue}></div>
+            <div className="app__playlistSlot reveal-group reveal revealY" onDragOver={dragOver} onDrop={dragAddQueue}></div>
             <FontAwesomeIcon icon={faShuffle} className='app__icon app__randomize' onClick={() => shuffleQueue(queue)} />
         </div>
     )

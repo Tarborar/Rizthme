@@ -1,0 +1,22 @@
+.reveal {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition-delay: calc(var(--delay) * 0.1s);
+}
+
+.revealX {
+  transform: translateX(40px);
+}
+
+.reveal-X {
+  transform: translateX(-40px);
+}
+
+.revealY {
+  transform: translateY(40px);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}

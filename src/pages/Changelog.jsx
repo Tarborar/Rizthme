@@ -1,8 +1,12 @@
+import { useReveal } from '../hooks/useReveal';
+import '../Styles/utils/revealAnimation.scss';
+
 import { useEffect } from "react"
 import { changelogList } from "../datas/changelogList"
 import '../Styles/pages/Changelog.scss'
 
 function Changelog() {
+    useReveal();
 
     //Active le scroll uniquement pour la page ChangeLog
     useEffect(() => {
@@ -13,15 +17,15 @@ function Changelog() {
     }, []);
 
     return (
-        <div className="changelog vertical gap">
-            <h2 className="center">Changelog</h2>
+        <div className="changelog vertical gap reveal-group">
+            <h2 className="center reveal revealY">Changelog</h2>
             {
                 changelogList.map((c) => (
                     <div key={c.date} className="changelog__container horizontal gap">
-                        <div className="glass glassHover changelog__date buttonPadding buttonText">
+                        <div className="glass glassHover changelog__date buttonPadding buttonText reveal reveal-X">
                             {c.date}
                         </div>
-                        <div className="changelog__info vertical gap">
+                        <div className="changelog__info vertical gap reveal reveal-X">
                             <h3 className="changelog__title smallTitle">
                                 {c.title}
                             </h3>

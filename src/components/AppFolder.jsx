@@ -4,7 +4,11 @@ import "../Styles/components/AppFolder.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
+import { useReveal } from '../hooks/useReveal';
+import '../Styles/utils/revealAnimation.scss';
+
 function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
+    useReveal();
     
     const [inputValue, setInputValue] = useState(""); //valeur de l'input search
 
@@ -31,7 +35,7 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
     }
 
     return(
-        <div className='vertical smallGap'>
+        <div className='vertical smallGap reveal-group'>
             <p className="app__folderTitle center">Folder</p>
             <div className="app__folderInput">
                 <input type="search" className='buttonPadding buttonText app__folderInputText' onInput={search}/>
@@ -75,7 +79,7 @@ function AppFolder({ folder, dragStart, dragOver, dragAddInFolder }){
                     //Si c'est un audio
                     (
                         <div key={audio.id}>
-                            <div draggable className="app__folderAudio horizontal glass glassHover audioPadding buttonText" onDragStart={(e) => dragStart(e, audio)}>
+                            <div draggable className="app__folderAudio horizontal glass glassHover audioPadding buttonText reveal revealY" onDragStart={(e) => dragStart(e, audio)}>
                                 <div className="app__cover">
                                     {audio.cover && <img src={audio.cover} alt="cover" className="app__audioCover"/>}
                                 </div>

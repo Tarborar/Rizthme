@@ -3,7 +3,12 @@ import "../Styles/components/AudioPanel.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faVolume, faVolumeXmark, faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 
+import { useReveal } from '../hooks/useReveal';
+import '../Styles/utils/revealAnimation.scss';
+
 function AudioPanel({ queue, setQueue }){
+    useReveal();
+
     const audioRef = useRef(null); //cible la balise <audio>
     const timeRangeRef = useRef(null); //cible l'input range temps de <audio>
     const [isPlaying, setIsPlaying] = useState(true); //vérifie si <audio> est en pause ou play
@@ -67,7 +72,7 @@ function AudioPanel({ queue, setQueue }){
     }
 
     return(
-        <div className="app__audiopanel">
+        <div className="app__audiopanel reveal-group reveal revealY">
             <audio 
                 src={queue[0]?.url || null} 
                 ref={audioRef}

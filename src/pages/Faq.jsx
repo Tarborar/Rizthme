@@ -1,8 +1,13 @@
+import { useReveal } from '../hooks/useReveal';
+import '../Styles/utils/revealAnimation.scss';
+
 import { useState } from 'react';
 import '../Styles/pages/Faq.scss';
 import useWindowWidth from '../hooks/useWindowWidth';
 
 function Faq() {
+    useReveal();
+    
     const [faqClicked, setFaqClicked] = useState(null);
 
     const windowWidth = useWindowWidth();
@@ -104,11 +109,11 @@ function Faq() {
     }
 
     return (
-        <div className="faq vertical center gap">
-            <h2>FAQ</h2>
+        <div className="faq vertical center gap reveal-group">
+            <h2 className='reveal revealY'>FAQ</h2>
             <svg
                 viewBox={`0 0 ${size} ${size}`}
-                className="faq-svg"
+                className="faq-svg reveal revealY"
             >
                 {Array.from({ length: segments }).map((_, i) => (
                     <a key={i} href={`#${i}`}>
@@ -121,8 +126,8 @@ function Faq() {
                 ))}
             </svg>
             
-            <button className='faq__button glass glassHover buttonPadding buttonText'>{inputContent}</button>
-            <h3 className='faq__title smallTitle'>{titleContent}</h3>
+            <button className='faq__button glass glassHover buttonPadding buttonText reveal revealY'>{inputContent}</button>
+            <h3 className='faq__title smallTitle reveal revealY'>{titleContent}</h3>
             <p className='faq__paragraph paragraph glass glassHover'>{answerContent}</p>
         </div>
     )
