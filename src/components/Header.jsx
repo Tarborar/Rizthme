@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import '../Styles/Components/Header.scss';
+import '../Styles/components/Header.scss';
 import LogoNavigation from '../assets/logo1.svg';
 import LogoNav from '../assets/LogoNavigation.svg';
 import useWindowWidth from '../hooks/useWindowWidth';

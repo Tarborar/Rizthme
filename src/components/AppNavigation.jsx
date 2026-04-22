@@ -15,7 +15,6 @@ function AppNavigation({ setAppMenu }){
     
     const windowWidth = useWindowWidth(); //récupère la taille de l'écran pour le responsive
     const isTablet = windowWidth < 1024;
-    const isMobile = windowWidth < 767;
 
     return(
         <nav className="app__menu reveal-group">

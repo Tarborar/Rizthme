@@ -1,7 +1,7 @@
 import { useReveal } from '../hooks/useReveal';
 import '../Styles/utils/revealAnimation.scss';
 
-import '../Styles/Pages/Features.scss';
+import '../Styles/pages/Features.scss';
 import Logo from '../assets/Logo.svg';
 
 function Features() {

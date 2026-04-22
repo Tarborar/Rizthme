@@ -3,7 +3,7 @@ import '../Styles/utils/revealAnimation.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
-import '../Styles/Pages/Home.scss';
+import '../Styles/pages/Home.scss';
 
 import Logo from '../assets/Logo.svg';
 
